@@ -1,30 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import Layout from "./components/Layout";
+import Header from "./components/Header";
 import useSWR from "swr";
-import fetch from "unfetch";
-import "./App.css";
-import Square from "./components/Square";
+import SquareViewer from "./components/SquareViewer";
 
-const fetcher = url => fetch(url).then(r => r.json());
+export default function App() {
+  const [state, setState] = useState({
+    location: getRandomLocation(),
+    passphrase: ""
+  });
 
-function App() {
   const { data: squares } = useSWR(
     "https://poster-api.frank.dev/squares",
     fetcher
   );
 
   if (!squares) {
-    return null;
+    return <div>loading...</div>;
   }
 
   return (
-    <div className="App">
-      <div style={{ position: "relative" }}>
-        {squares.map(square => (
-          <Square key={square.location} {...square} />
-        ))}
-      </div>
-    </div>
+    <Layout>
+      <Header>Collaborative Holliday Poster 2019</Header>
+      <SquareViewer squares={squares} location={state.location} />
+      <div>buttons</div>
+    </Layout>
   );
 }
 
-export default App;
+const getRandomLocation = () => [
+  Math.floor(Math.random() * 8),
+  Math.floor(Math.random() * 9)
+];
+
+const fetcher = url => fetch(url).then(r => r.json());

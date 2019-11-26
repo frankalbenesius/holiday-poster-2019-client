@@ -1,7 +1,5 @@
 import React from "react";
 
-const squareWidth = 200;
-
 export default function Square(props) {
   const [left, top] = getLocationInPixels(props.location);
 
@@ -15,25 +13,36 @@ export default function Square(props) {
         position: "absolute",
         left: left,
         top: top,
-        width: squareWidth,
-        height: squareWidth,
+        width: "100%",
+        height: "100%",
         color: "white",
-        textTransform: "uppercase",
         background: createStripesBG(props.location)
       }}
     >
-      <div>RESERVED FOR:</div>
-      <div>{props.participant}</div>
+      <div>Reserved For</div>
+      <div style={{ textTransform: "capitalize" }}>{props.participant}</div>
       <img
         alt=""
         style={{ width: "100%", position: "absolute", top: 0, left: 0 }}
         src={props.image}
       />
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          padding: "0.1rem",
+          color: "white",
+          fontSize: "0.8em"
+        }}
+      >
+        [{props.location.join(",")}]
+      </div>
     </div>
   );
 }
 
-const getLocationInPixels = location => location.map(n => n * squareWidth);
+const getLocationInPixels = location => location.map(n => n * 100 + "%");
 
 const createStripesBG = location => {
   const colorA = "#222";

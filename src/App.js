@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "./components/Layout";
 import Header from "./components/Header";
 import useSWR from "swr";
@@ -9,6 +9,13 @@ export default function App() {
     location: getRandomLocation(),
     passphrase: ""
   });
+
+  useInterval(() => {
+    setState({
+      ...state,
+      location: getRandomLocation()
+    });
+  }, 2000);
 
   const { data: squares } = useSWR(
     "https://poster-api.frank.dev/squares",
@@ -34,3 +41,23 @@ const getRandomLocation = () => [
 ];
 
 const fetcher = url => fetch(url).then(r => r.json());
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}

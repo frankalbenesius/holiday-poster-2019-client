@@ -27,7 +27,8 @@ function PosterPositioner(props) {
         top: top,
         left: left,
         width: "100%",
-        height: "100%"
+        height: "100%",
+        transition: "top 0.5s, left 0.5s"
       }}
     >
       <div style={{ paddingTop: "100%" }}></div>

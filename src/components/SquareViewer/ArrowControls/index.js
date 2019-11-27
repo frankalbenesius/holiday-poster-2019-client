@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ArrowControls.module.css";
-import { cells } from "../../../App";
+import { cells } from "../../../pages/PosterPage";
 
 export default function ArrowControls(props) {
   return (

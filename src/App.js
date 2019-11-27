@@ -1,50 +1,32 @@
-import React, { useState } from "react";
-import Layout from "./components/Layout";
-import Header from "./components/Header";
-import useSWR from "swr";
-import SquareViewer from "./components/SquareViewer";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-export const cells = {
-  x: 8,
-  y: 9
-};
+import PosterPage from "./pages/PosterPage";
+import InfoPage from "./pages/InfoPage";
+import ChatPage from "./pages/ChatPage";
+import IndexPage from "./pages/IndexPage";
+import MissingPage from "./pages/MissingPage";
 
 export default function App() {
-  const [state, setState] = useState({
-    location: getRandomLocation(),
-    passphrase: ""
-  });
-
-  const { data: squares } = useSWR(
-    "https://poster-api.frank.dev/squares",
-    fetcher
-  );
-
-  if (!squares) {
-    return <div>loading...</div>;
-  }
-
   return (
-    <Layout>
-      <Header>Collaborative Holliday Poster 2019</Header>
-      <SquareViewer
-        squares={squares}
-        location={state.location}
-        onLocationChange={location => {
-          setState({
-            ...state,
-            location
-          });
-        }}
-      />
-      <div>buttons</div>
-    </Layout>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <IndexPage />
+        </Route>
+        <Route path="/info">
+          <InfoPage />
+        </Route>
+        <Route path="/poster">
+          <PosterPage />
+        </Route>
+        <Route path="/chat">
+          <ChatPage />
+        </Route>
+        <Route path="*">
+          <MissingPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-const getRandomLocation = () => [
-  Math.floor(Math.random() * cells.x),
-  Math.floor(Math.random() * cells.y)
-];
-
-const fetcher = url => fetch(url).then(r => r.json());

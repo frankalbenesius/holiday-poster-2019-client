@@ -4,7 +4,7 @@ export default function PosterFrame(props) {
   return (
     <div
       style={{
-        flex: "0 0",
+        flex: "0 0 auto",
         width: "100%",
         background: "black",
         position: "relative",

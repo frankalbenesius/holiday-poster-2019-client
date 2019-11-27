@@ -15,7 +15,6 @@ export default function PosterPositioner(props) {
         transition: "top 0.5s, left 0.5s"
       }}
     >
-      <div style={{ paddingTop: "100%" }}></div>
       {props.children}
     </div>
   );

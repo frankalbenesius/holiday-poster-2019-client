@@ -1,7 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
-import Page from "../components/Page";
-
-export default function IndexPage(props) {
-  return <Page>redirect</Page>;
+export default function IndexPage() {
+  return <Redirect to="/poster" />;
 }

@@ -19,7 +19,7 @@ export default function PosterPage(props) {
   }
 
   return (
-    <Page header="Collaborative Holliday Poster 2019">
+    <Page>
       <SquareViewer
         squares={squares}
         location={state.location}
@@ -30,7 +30,9 @@ export default function PosterPage(props) {
           });
         }}
       />
-      <div style={{ flex: "1 0 auto" }}>buttons</div>
+      <div style={{ flex: "1 0 auto" }}>
+        <input type="text" value="test"></input>
+      </div>
     </Page>
   );
 }

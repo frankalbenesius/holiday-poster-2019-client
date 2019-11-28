@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useSWR from "swr";
-import { css } from "emotion";
 
 import SquareViewer from "../components/SquareViewer";
 import { fetcher, getRandomLocation } from "../lib/util";
@@ -31,11 +30,6 @@ export default function PosterView() {
           });
         }}
       />
-      <div
-        className={css`
-          flex: 1 0 auto;
-        `}
-      ></div>
     </div>
   );
 }

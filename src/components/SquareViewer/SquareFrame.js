@@ -1,24 +1,21 @@
 import React from "react";
-import { css } from "emotion";
+import styled from "@emotion/styled";
+import { SquarePaddingPush } from "./AdjacentSquareDimmer";
 
 export default function SquareFrame(props) {
   return (
-    <div
-      className={css`
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 70%;
-        margin: 15%;
-        background: #999;
-      `}
-    >
-      <div
-        className={css`
-          padding-top: 100%;
-        `}
-      ></div>
+    <SquareFrameWrapper>
+      <SquarePaddingPush />
       {props.children}
-    </div>
+    </SquareFrameWrapper>
   );
 }
+
+const SquareFrameWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  margin: 15%;
+  background: #999;
+`;

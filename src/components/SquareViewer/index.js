@@ -1,6 +1,6 @@
 import React from "react";
 
-import Square from "../Square";
+import PosterSquare from "../PosterSquare";
 import PosterFrame from "./PosterFrame";
 import SquareFrame from "./SquareFrame";
 import PosterPositioner from "./PosterPositioner";
@@ -13,7 +13,7 @@ export default function SquareViewer(props) {
       <SquareFrame>
         <PosterPositioner location={props.location}>
           {props.squares.map(square => (
-            <Square key={square.location} {...square} />
+            <PosterSquare key={square.location} {...square} />
           ))}
         </PosterPositioner>
       </SquareFrame>

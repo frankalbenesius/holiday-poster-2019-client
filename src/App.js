@@ -14,6 +14,12 @@ export default function App() {
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_ACTIVE_VIEW": {
+      return {
+        ...state,
+        activeView: action.view
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

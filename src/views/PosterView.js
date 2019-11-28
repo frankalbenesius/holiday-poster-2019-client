@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import useSWR from "swr";
+import { css } from "emotion";
 
-import Page from "../components/Page";
 import SquareViewer from "../components/SquareViewer";
+import { fetcher, getRandomLocation } from "../lib/util";
 
-export default function PosterPage(props) {
+export default function PosterView() {
   const [state, setState] = useState({
     location: getRandomLocation()
   });
@@ -19,7 +20,7 @@ export default function PosterPage(props) {
   }
 
   return (
-    <Page>
+    <div>
       <SquareViewer
         squares={squares}
         location={state.location}
@@ -30,21 +31,11 @@ export default function PosterPage(props) {
           });
         }}
       />
-      <div style={{ flex: "1 0 auto" }}>
-        <input type="text" value="test"></input>
-      </div>
-    </Page>
+      <div
+        className={css`
+          flex: 1 0 auto;
+        `}
+      ></div>
+    </div>
   );
 }
-
-const getRandomLocation = () => [
-  Math.floor(Math.random() * cells.x),
-  Math.floor(Math.random() * cells.y)
-];
-
-const fetcher = url => fetch(url).then(r => r.json());
-
-export const cells = {
-  x: 8,
-  y: 9
-};

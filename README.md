@@ -2,6 +2,8 @@
 
 ## TODO
 
+- remove routing, store global reducer context
+- display timer with words, not colons
 - location bar under square viewer
 - better loading screen before app is ready
 - arrow buttons to navigate squares

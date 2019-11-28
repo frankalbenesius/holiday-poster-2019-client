@@ -1,32 +1,36 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import PosterPage from "./pages/PosterPage";
-import InfoPage from "./pages/InfoPage";
-import ChatPage from "./pages/ChatPage";
-import IndexPage from "./pages/IndexPage";
-import MissingPage from "./pages/MissingPage";
+import Layout from "./components/Layout";
+import ViewRouter from "./components/ViewRouter";
 
 export default function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <IndexPage />
-        </Route>
-        <Route path="/info">
-          <InfoPage />
-        </Route>
-        <Route path="/poster">
-          <PosterPage />
-        </Route>
-        <Route path="/chat">
-          <ChatPage />
-        </Route>
-        <Route path="*">
-          <MissingPage />
-        </Route>
-      </Switch>
-    </Router>
+    <AppProvider>
+      <Layout>
+        <ViewRouter />
+      </Layout>
+    </AppProvider>
+  );
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+}
+
+export const StateContext = React.createContext(null);
+export const DispatchContext = React.createContext(null);
+
+function AppProvider(props) {
+  const [state, dispatch] = React.useReducer(reducer, {
+    activeView: "poster"
+  });
+  return (
+    <DispatchContext.Provider value={dispatch}>
+      <StateContext.Provider value={state}>
+        {props.children}
+      </StateContext.Provider>
+    </DispatchContext.Provider>
   );
 }

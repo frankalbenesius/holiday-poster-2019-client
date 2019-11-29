@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
+import useLocalStorage from "react-use-localstorage";
 
 import { CELL_COUNT, COLORS } from "../../constants";
 import { SquarePaddingPush } from "./AdjacentSquareDimmer";
+import { parseLocationStr } from "../../lib/util";
 
-export default function ArrowControls(props) {
+export default function PosterControls(props) {
+  const [defaultLocation] = useLocalStorage("defaultLocation");
+
   return (
-    <ArrowControlsWrapper>
+    <PosterControlsWrapper>
       <SquarePaddingPush />
       <UpArrow
         location={props.location}
@@ -24,18 +28,54 @@ export default function ArrowControls(props) {
         location={props.location}
         onLocationChange={props.onLocationChange}
       />
-    </ArrowControlsWrapper>
+      {defaultLocation && (
+        <HomeButton
+          onClick={() =>
+            props.onLocationChange(parseLocationStr(defaultLocation))
+          }
+        />
+      )}
+      <ZoomButton />
+    </PosterControlsWrapper>
   );
 }
 
-const ArrowControlsWrapper = styled.div`
+function HomeButton(props) {
+  return (
+    <ButtonWrapper
+      top={"85%"}
+      left={"0"}
+      width={"15%"}
+      height={"15%"}
+      onClick={props.onClick}
+    >
+      <i className="fas fa-home"></i>
+    </ButtonWrapper>
+  );
+}
+
+function ZoomButton(props) {
+  return (
+    <ButtonWrapper
+      top={"85%"}
+      left={"85%"}
+      width={"15%"}
+      height={"15%"}
+      onClick={props.onClick}
+    >
+      <i className="fas fa-search-minus"></i>
+    </ButtonWrapper>
+  );
+}
+
+const PosterControlsWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 `;
 
-const ArrowWrapper = styled.div`
+const ButtonWrapper = styled.div`
   top: ${p => p.top};
   left: ${p => p.left};
   width: ${p => p.width};
@@ -58,7 +98,7 @@ function UpArrow(props) {
     return null;
   } else {
     return (
-      <ArrowWrapper
+      <ButtonWrapper
         top={"0"}
         left={"15%"}
         width={"70%"}
@@ -68,7 +108,7 @@ function UpArrow(props) {
         }}
       >
         <i className="fas fa-arrow-circle-up"></i>
-      </ArrowWrapper>
+      </ButtonWrapper>
     );
   }
 }
@@ -78,7 +118,7 @@ function DownArrow(props) {
     return null;
   } else {
     return (
-      <ArrowWrapper
+      <ButtonWrapper
         onClick={e => {
           props.onLocationChange([x, y + 1]);
         }}
@@ -88,7 +128,7 @@ function DownArrow(props) {
         height="15%"
       >
         <i className="fas fa-arrow-circle-down"></i>
-      </ArrowWrapper>
+      </ButtonWrapper>
     );
   }
 }
@@ -98,7 +138,7 @@ function RightArrow(props) {
     return null;
   } else {
     return (
-      <ArrowWrapper
+      <ButtonWrapper
         onClick={e => {
           props.onLocationChange([x + 1, y]);
         }}
@@ -108,7 +148,7 @@ function RightArrow(props) {
         height="70%"
       >
         <i className="fas fa-arrow-circle-right"></i>
-      </ArrowWrapper>
+      </ButtonWrapper>
     );
   }
 }
@@ -118,7 +158,7 @@ function LeftArrow(props) {
     return null;
   } else {
     return (
-      <ArrowWrapper
+      <ButtonWrapper
         onClick={e => {
           props.onLocationChange([x - 1, y]);
         }}
@@ -128,7 +168,7 @@ function LeftArrow(props) {
         height="70%"
       >
         <i className="fas fa-arrow-circle-left"></i>
-      </ArrowWrapper>
+      </ButtonWrapper>
     );
   }
 }

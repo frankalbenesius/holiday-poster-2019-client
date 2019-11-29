@@ -6,7 +6,6 @@
   - upload image if passphrase
   - zoom out button
   - view header image, add header image
-  - home refocus button
   - swipes to navigate squares, zoom out?
 - UI:
   - make it responsive

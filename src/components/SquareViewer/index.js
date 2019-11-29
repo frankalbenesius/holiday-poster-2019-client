@@ -5,7 +5,7 @@ import PosterFrame from "./PosterFrame";
 import SquareFrame from "./SquareFrame";
 import PosterPositioner from "./PosterPositioner";
 import AdjacentSquareDimmer from "./AdjacentSquareDimmer";
-import ArrowControls from "./ArrowControls";
+import PosterControls from "./PosterControls";
 
 export default function SquareViewer(props) {
   return (
@@ -18,7 +18,7 @@ export default function SquareViewer(props) {
         </PosterPositioner>
       </SquareFrame>
       <AdjacentSquareDimmer />
-      <ArrowControls
+      <PosterControls
         location={props.location}
         onLocationChange={props.onLocationChange}
       />

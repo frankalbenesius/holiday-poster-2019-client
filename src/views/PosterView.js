@@ -8,6 +8,7 @@ import PassphraseChecker from "../components/PassphraseChecker";
 import { CELL_COUNT } from "../constants";
 import LoadingScreen from "../components/LoadingScreen";
 import SquareMetaBar from "../components/SquareMetaBar";
+import ImageInput from "../components/ImageInput";
 
 export default function PosterView({ squares }) {
   const [defaultLocation] = useLocalStorage("defaultLocation");
@@ -81,7 +82,9 @@ export default function PosterView({ squares }) {
       <SquareMetaBar square={currentSquare} />
       <UploadArea>
         <PassphraseChecker
-          renderWithPassphrase={passphrase => <div>{passphrase}</div>}
+          renderWithPassphrase={passphrase => (
+            <ImageInput passphrase={passphrase} />
+          )}
         />
       </UploadArea>
     </PosterViewWrapper>

@@ -10,6 +10,7 @@ WebFont.load({
     families: ["Calistoga", "Roboto"]
   },
   active: renderApp,
+  timeout: 1500,
   inactive: renderApp
 });
 

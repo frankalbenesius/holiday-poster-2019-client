@@ -1,18 +1,12 @@
-import React, { useState } from "react";
-import useSWR from "swr";
+import React from "react";
 
 import SquareViewer from "../components/SquareViewer";
-import { fetcher, getRandomLocation } from "../lib/util";
+import { getRandomLocation } from "../lib/util";
 
-export default function PosterView() {
-  const [state, setState] = useState({
+export default function PosterView({ squares }) {
+  const [state, setState] = React.useState({
     location: getRandomLocation()
   });
-
-  const { data: squares } = useSWR(
-    "https://poster-api.frank.dev/squares",
-    fetcher
-  );
 
   if (!squares) {
     return <div>loading...</div>;

@@ -27,7 +27,11 @@ export default function Layout(props) {
               if (index > 0 && index % 20 === 0) {
                 text = "🆒🆒🆒";
               }
-              return <span>{text}&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>;
+              return (
+                <span style={{ width: "506px" }}>
+                  {text}&nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                </span>
+              );
             }}
           </Ticker>
         </TickerWrapper>

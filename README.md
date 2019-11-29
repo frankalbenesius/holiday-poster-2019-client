@@ -2,9 +2,6 @@
 
 ## TODO
 
-- MISC:
-  - create "test" recipient list for work testing
-  - create printouts for work testing on monday
 - POSTER VIEW:
   - enter passphrase
     - post passphrase
@@ -31,6 +28,9 @@
   - make it responsive
 - POSTER DESIGN:
   - design header of poster, upload it
+- MISC:
+  - create "test" recipient list for work testing
+  - create printouts for work testing on monday
 - POSTCARDS:
   - design postcard illustration for plotting
   - design postcard context for plotting

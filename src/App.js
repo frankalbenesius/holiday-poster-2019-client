@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "./components/Layout";
 import ViewRouter from "./components/ViewRouter";
+import { getRandomLocation } from "./lib/util";
 
 export default function App() {
   return (

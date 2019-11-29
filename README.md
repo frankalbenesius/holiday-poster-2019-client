@@ -3,10 +3,6 @@
 ## TODO
 
 - POSTER VIEW:
-  - enter passphrase
-    - post passphrase
-    - error: say no way bud
-    - success: store response in localstorage, refocus to their square
   - upload image if passphrase
   - zoom out button
   - view header image, add header image

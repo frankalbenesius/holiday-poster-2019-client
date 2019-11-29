@@ -7,8 +7,8 @@ export default function AdjacentSquareDimmer() {
       <SquarePaddingPush />
       <DimmedRectangle top={"0"} left={"0"} width={"100%"} height={"15%"} />
       <DimmedRectangle top={"15%"} left={"0"} width={"15%"} height={"70%"} />
-      <DimmedRectangle left={"0"} bottom={"0"} width={"100%"} height={"15%"} />
-      <DimmedRectangle right={"0"} top={"15%"} width={"15%"} height={"70%"} />
+      <DimmedRectangle top={"85%"} left={"0"} width={"100%"} height={"15%"} />
+      <DimmedRectangle top={"15%"} left={"85%"} width={"15%"} height={"70%"} />
     </Wrapper>
   );
 }
@@ -30,5 +30,5 @@ const DimmedRectangle = styled.div`
   left: ${p => p.left};
   width: ${p => p.width};
   height: ${p => p.height};
-  background: rgba(0;0;0;0.25);
+  background: rgba(0, 0, 0, 0.25);
 `;

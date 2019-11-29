@@ -9,6 +9,7 @@
   - home refocus button
   - display location bar under square viewer
   - swipes to navigate squares, zoom out?
+  - move in response to arrow keys
 - UI:
   - make it responsive
 - POSTER DESIGN:

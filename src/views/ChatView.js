@@ -9,12 +9,17 @@ import LoadingScreen from "../components/LoadingScreen";
 
 export default function ChatView({ messages, revalidateMessages }) {
   const messagesEndRef = React.useRef(null);
-  const scrollToBottom = () => {
-    if (messages) {
+  const prevMessageCountRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (messages.length > prevMessageCountRef.current) {
       messagesEndRef.current.scrollIntoView();
     }
-  };
-  React.useEffect(scrollToBottom, [messages]);
+  }, [messages]);
+
+  React.useEffect(() => {
+    prevMessageCountRef.current = messages.length;
+  });
 
   if (!messages) {
     return <LoadingScreen />;

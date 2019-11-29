@@ -5,25 +5,61 @@ import styled from "@emotion/styled";
 import SquareViewer from "../components/SquareViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
 import PassphraseChecker from "../components/PassphraseChecker";
-import { COLORS } from "../constants";
+import { COLORS, CELL_COUNT } from "../constants";
 import LoadingScreen from "../components/LoadingScreen";
 
 export default function PosterView({ squares }) {
   const [defaultLocation] = useLocalStorage("defaultLocation");
 
-  const [state, setState] = React.useState({
-    location: defaultLocation
-      ? parseLocationStr(defaultLocation)
-      : getRandomLocation()
-  });
+  const [location, setLocation] = React.useState(
+    defaultLocation ? parseLocationStr(defaultLocation) : getRandomLocation()
+  );
 
   React.useEffect(() => {
     if (defaultLocation) {
-      setState({
-        location: parseLocationStr(defaultLocation)
-      });
+      setLocation(parseLocationStr(defaultLocation));
     }
   }, [defaultLocation]);
+
+  React.useEffect(() => {
+    function handleKeyDown(event) {
+      const { key } = event;
+      const [x, y] = location;
+      switch (key) {
+        case "ArrowRight": {
+          if (x < CELL_COUNT.x - 1) {
+            setLocation([x + 1, y]);
+          }
+          break;
+        }
+        case "ArrowLeft": {
+          if (x > 0) {
+            setLocation([x - 1, y]);
+          }
+          break;
+        }
+        case "ArrowUp": {
+          if (y > 0) {
+            setLocation([x, y - 1]);
+          }
+          break;
+        }
+        case "ArrowDown": {
+          if (y < CELL_COUNT.y - 1) {
+            setLocation([x, y + 1]);
+          }
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [location, setLocation]);
 
   if (!squares) {
     return <LoadingScreen />;
@@ -34,13 +70,8 @@ export default function PosterView({ squares }) {
       <PosterArea>
         <SquareViewer
           squares={squares}
-          location={state.location}
-          onLocationChange={location => {
-            setState({
-              ...state,
-              location
-            });
-          }}
+          location={location}
+          onLocationChange={setLocation}
         />
       </PosterArea>
       <UploadArea>

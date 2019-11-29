@@ -5,8 +5,9 @@ import styled from "@emotion/styled";
 import SquareViewer from "../components/SquareViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
 import PassphraseChecker from "../components/PassphraseChecker";
-import { COLORS, CELL_COUNT } from "../constants";
+import { CELL_COUNT } from "../constants";
 import LoadingScreen from "../components/LoadingScreen";
+import SquareMetaBar from "../components/SquareMetaBar";
 
 export default function PosterView({ squares }) {
   const [defaultLocation] = useLocalStorage("defaultLocation");
@@ -65,6 +66,9 @@ export default function PosterView({ squares }) {
     return <LoadingScreen />;
   }
 
+  const currentSquare = squares.find(s => {
+    return s.location[0] === location[0] && s.location[1] === location[1];
+  });
   return (
     <PosterViewWrapper>
       <PosterArea>
@@ -74,6 +78,7 @@ export default function PosterView({ squares }) {
           onLocationChange={setLocation}
         />
       </PosterArea>
+      <SquareMetaBar square={currentSquare} />
       <UploadArea>
         <PassphraseChecker
           renderWithPassphrase={passphrase => <div>{passphrase}</div>}
@@ -94,6 +99,5 @@ const PosterArea = styled.div`
 `;
 const UploadArea = styled.div`
   flex: 0 0 auto;
-  border-top: 2px solid ${COLORS.tealDark};
   padding: 1rem;
 `;

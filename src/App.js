@@ -30,7 +30,7 @@ export const DispatchContext = React.createContext(null);
 
 function AppProvider(props) {
   const [state, dispatch] = React.useReducer(reducer, {
-    activeView: "poster"
+    activeView: "info"
   });
   return (
     <DispatchContext.Provider value={dispatch}>

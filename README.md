@@ -24,12 +24,11 @@
     - success: store response in localstorage, allow messages
   - post messages if passphrase stored
 - INFO VIEW:
-  - add content
   - go to info view if nothing stored in localstorage
     - set something in localstorage that starts us at poster view
 - UI:
-  - display timer with words, not colons
   - display loading before squares and chat are ready
+  - make it responsive
 - POSTER DESIGN:
   - design header of poster, upload it
 - POSTCARDS:

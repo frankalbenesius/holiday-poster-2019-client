@@ -32,9 +32,10 @@ export default function ViewNav() {
 }
 
 const Nav = styled.nav`
+  border-top: 2px solid ${COLORS.tealDark};
   flex: 0 0 auto;
   display: flex;
-  background: COLORS.black;
+  background: COLORS.teal;
 `;
 
 const NavItem = styled.div`
@@ -43,9 +44,8 @@ const NavItem = styled.div`
   padding: 0.75rem 0.75rem 0.45rem 0.75rem;
   text-decoration: none;
   font-size: 1.5rem;
-  background: ${COLORS.black};
+  background: ${COLORS.teal};
   border-bottom-width: 0.3rem;
   border-bottom-style: solid;
-  border-bottom-color: ${p => (p.isActive ? COLORS.gray : COLORS.black)};
-  color: ${COLORS.white};
+  border-bottom-color: ${p => (p.isActive ? COLORS.tealDark : COLORS.teal)};
 `;

@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function useTimeUntil2020() {
-  const [timerText, setTimerText] = useState(getTimeUntil2020());
+  const [timerText, setTimerText] = useState(
+    formatTimeLeft(getTimeUntil2020())
+  );
 
   useInterval(() => {
-    setTimerText(getTimeUntil2020());
+    const timeValues = getTimeUntil2020();
+    const formattedTimeLeft = formatTimeLeft(timeValues);
+    setTimerText(formattedTimeLeft);
   }, 1000);
 
   return timerText;
@@ -30,6 +34,11 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
+export function submissionsClosed(optionalTimeValues) {
+  const timeValues = optionalTimeValues || getTimeUntil2020();
+  return Object.values(timeValues).every(value => value === 0);
+}
+
 function getTimeUntil2020() {
   var now = new Date();
   var endDate = new Date(2020, 0, 1);
@@ -47,8 +56,24 @@ function getTimeUntil2020() {
     minutes %= 60;
     seconds %= 60;
 
-    return [days, hours, minutes, seconds]
-      .map(num => num.toString().padStart(2, "0"))
-      .join(":");
+    return {
+      days,
+      hours,
+      minutes,
+      seconds
+    };
   }
+}
+
+function formatTimeLeft(timeValues) {
+  if (submissionsClosed(timeValues)) {
+    return "None. It's over, y'all.";
+  }
+
+  const { days, hours, minutes, seconds } = timeValues;
+  if (days > 0) {
+    return `${days} days`;
+  }
+
+  return [hours, minutes, seconds].map(x => x.toString().padStart(2)).join(":");
 }

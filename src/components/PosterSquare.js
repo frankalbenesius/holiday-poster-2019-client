@@ -7,7 +7,7 @@ export default function PosterSquare(props) {
   return (
     <PosterSquareWrapper top={top} left={left} location={props.location}>
       <div>Reserved For</div>
-      <CapitalizedDiv>{props.participant}</CapitalizedDiv>
+      <ParticipantName>{props.participant}</ParticipantName>
       <PosterSquareImage alt="" src={props.image} />
     </PosterSquareWrapper>
   );
@@ -20,7 +20,9 @@ const PosterSquareImage = styled.img`
   left: 0;
 `;
 
-const CapitalizedDiv = styled.div`
+const ParticipantName = styled.div`
+  font-family: "Calistoga";
+  font-size: 1.5em;
   text-transform: capitalize;
 `;
 

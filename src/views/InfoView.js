@@ -67,9 +67,9 @@ const InfoHeader = styled.div`
   margin-bottom: 0.5em;
 `;
 
-const InfoContent = styled.p`
+const InfoContent = styled.div`
+  margin: 1rem 0;
   text-align: left;
-  margin-bottom: 1em;
 `;
 
 const animationName = keyframes`

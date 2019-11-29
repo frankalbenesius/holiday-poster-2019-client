@@ -13,7 +13,8 @@
     "react-scripts": "3.2.0",
     "react-ticker": "^1.2.1",
     "swr": "^0.1.10",
-    "unfetch": "^4.1.0"
+    "unfetch": "^4.1.0",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",

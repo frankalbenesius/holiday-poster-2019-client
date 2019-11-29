@@ -24,7 +24,6 @@
   - go to info view if nothing stored in localstorage
     - set something in localstorage that starts us at poster view
 - UI:
-  - display loading before squares and chat are ready
   - make it responsive
 - POSTER DESIGN:
   - design header of poster, upload it

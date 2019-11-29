@@ -25,11 +25,19 @@ export default function ViewRouter() {
       return <InfoView />;
     }
     case "chat": {
-      return <ChatView messages={messages} squares={squares} />;
+      return (
+        <ChatView
+          messages={messages}
+          squares={squares}
+          revalidateMessages={revalidateMessages}
+        />
+      );
     }
     default:
     case "poster": {
-      return <PosterView squares={squares} />;
+      return (
+        <PosterView squares={squares} revalidateSquares={revalidateSquares} />
+      );
     }
   }
 }

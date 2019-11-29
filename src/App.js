@@ -1,7 +1,7 @@
 import React from "react";
+
 import Layout from "./components/Layout";
 import ViewRouter from "./components/ViewRouter";
-import { getRandomLocation } from "./lib/util";
 
 export default function App() {
   return (
@@ -30,9 +30,20 @@ export const StateContext = React.createContext(null);
 export const DispatchContext = React.createContext(null);
 
 function AppProvider(props) {
+  React.useEffect(() => {
+    if (window && window.localStorage) {
+      window.localStorage.setItem("hasVisitedBefore", "yep");
+    }
+  }, []);
+
+  const hasVisitedBefore =
+    window && window.localStorage
+      ? !!window.localStorage.getItem("hasVisitedBefore")
+      : true;
   const [state, dispatch] = React.useReducer(reducer, {
-    activeView: "info"
+    activeView: hasVisitedBefore ? "poster" : "info"
   });
+
   return (
     <DispatchContext.Provider value={dispatch}>
       <StateContext.Provider value={state}>

@@ -1,9 +1,9 @@
 import Color from "color";
 
+// https://colorhunt.co/palette/156289
 const teal = Color("#00ffa2");
 const orange = Color("#ec9b3b");
 const pink = Color("#e8647c");
-
 export const COLORS = {
   black: "#000",
   grayLight: "#cfd3d7",

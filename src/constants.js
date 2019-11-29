@@ -25,3 +25,6 @@ export const CELL_COUNT = {
   x: 8,
   y: 9
 };
+
+// export const API_URL = "http://localhost:3001";
+export const API_URL = "https://poster-api.frank.dev";

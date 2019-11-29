@@ -1,14 +1,16 @@
 import React from "react";
 import fetch from "unfetch";
 import TextForm from "./TextForm";
+import { API_URL } from "../constants";
 
 export default function MessageInput({ passphrase, revalidateMessages }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 
   function handleMessageSubmit(message) {
+    setError("");
     setLoading(true);
-    fetch("https://poster-api.frank.dev/messages", {
+    fetch(API_URL + "/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -16,9 +18,7 @@ export default function MessageInput({ passphrase, revalidateMessages }) {
       body: JSON.stringify({ text: message, passphrase })
     })
       .then(res => {
-        if (res.ok) {
-          setError("");
-        } else {
+        if (!res.ok) {
           res.json().then(err => {
             if (err.message) {
               setError(err.message);

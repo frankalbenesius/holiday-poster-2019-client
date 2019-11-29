@@ -14,6 +14,7 @@ export default function PassphraseChecker(props) {
   const [error, setError] = React.useState("");
 
   function handlePassphraseSubmit(proposedPassphrase) {
+    setError("");
     setLoading(true);
     fetch("https://poster-api.frank.dev/locate", {
       method: "POST",
@@ -36,8 +37,12 @@ export default function PassphraseChecker(props) {
         }
       })
       .then(({ location }) => {
-        setPassphrase(proposedPassphrase);
-        setDefaultLocation(location.toString());
+        if (location) {
+          setPassphrase(proposedPassphrase);
+          setDefaultLocation(location.toString());
+        } else {
+          setError("Not a valid passphrase, bud.");
+        }
       })
       .finally(() => {
         setLoading(false);

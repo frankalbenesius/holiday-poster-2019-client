@@ -6,6 +6,7 @@ import { StateContext } from "../App";
 import PosterView from "../views/PosterView";
 import InfoView from "../views/InfoView";
 import ChatView from "../views/ChatView";
+import { API_URL } from "../constants";
 
 export default function ViewRouter() {
   const swrConfig = {
@@ -13,13 +14,13 @@ export default function ViewRouter() {
   };
 
   const { data: squares, revalidate: revalidateSquares } = useSWR(
-    "https://poster-api.frank.dev/squares",
+    API_URL + "/squares",
     fetcher,
     swrConfig
   );
 
   const { data: messages, revalidate: revalidateMessages } = useSWR(
-    "https://poster-api.frank.dev/messages",
+    API_URL + "/messages",
     fetcher,
     swrConfig
   );

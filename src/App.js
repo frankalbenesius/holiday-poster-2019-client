@@ -41,7 +41,7 @@ function AppProvider(props) {
       ? !!window.localStorage.getItem("hasVisitedBefore")
       : true;
   const [state, dispatch] = React.useReducer(reducer, {
-    activeView: hasVisitedBefore ? "poster" : "info"
+    activeView: hasVisitedBefore ? "chat" : "info"
   });
 
   return (

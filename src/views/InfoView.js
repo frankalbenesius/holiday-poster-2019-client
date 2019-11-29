@@ -4,7 +4,7 @@ import { keyframes } from "@emotion/core";
 
 import { COLORS } from "../constants";
 
-export const APP_TITLE = "Frank's Collaborative Poster Project of 2019";
+export const APP_TITLE = "Frank's Collaborative Poster Project 2019";
 
 export default function InfoView() {
   return (
@@ -76,8 +76,11 @@ const animationName = keyframes`
 0% {
   border-color: ${COLORS.pink};
 }
-50% {
+33% {
   border-color: ${COLORS.orange};
+}
+66% {
+  border-color: ${COLORS.teal};
 }
 100% {
   border-color: ${COLORS.pink};

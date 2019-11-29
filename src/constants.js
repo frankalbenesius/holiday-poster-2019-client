@@ -9,7 +9,7 @@ export const COLORS = {
   grayLight: "#cfd3d7",
   gray: "#adb4b9",
   grayDark: "#7f8b93",
-  white: teal.lighten(0.95).string(),
+  white: "#fff",
   teal: teal.string(),
   tealDark: teal.darken(0.25).string(),
   tealLight: teal.lighten(0.75).string(),
@@ -18,7 +18,7 @@ export const COLORS = {
   orangeLight: orange.lighten(0.75).string(),
   pink: pink.string(),
   pinkDark: pink.darken(0.25).string(),
-  pinkLight: pink.lighten(0.75).string()
+  pinkLight: pink.lighten(0.4).string()
 };
 
 export const CELL_COUNT = {

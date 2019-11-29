@@ -5,6 +5,7 @@ import MessageInput from "../components/MessageInput";
 import PassphraseChecker from "../components/PassphraseChecker";
 import { COLORS } from "../constants";
 import Message from "../components/Message";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function ChatView({ messages, revalidateMessages }) {
   const messagesEndRef = React.useRef(null);
@@ -16,7 +17,7 @@ export default function ChatView({ messages, revalidateMessages }) {
   React.useEffect(scrollToBottom, [messages]);
 
   if (!messages) {
-    return <div>loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

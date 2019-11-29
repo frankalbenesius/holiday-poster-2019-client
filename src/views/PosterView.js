@@ -6,6 +6,7 @@ import SquareViewer from "../components/SquareViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
 import PassphraseChecker from "../components/PassphraseChecker";
 import { COLORS } from "../constants";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function PosterView({ squares }) {
   const [defaultLocation] = useLocalStorage("defaultLocation");
@@ -25,7 +26,7 @@ export default function PosterView({ squares }) {
   }, [defaultLocation]);
 
   if (!squares) {
-    return <div>loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

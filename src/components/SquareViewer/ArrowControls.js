@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-import { CELL_COUNT } from "../../constants";
+import { CELL_COUNT, COLORS } from "../../constants";
 import { SquarePaddingPush } from "./AdjacentSquareDimmer";
 
 export default function ArrowControls(props) {
@@ -48,7 +48,7 @@ const ArrowWrapper = styled.div`
   font-size: 2em;
   transition: background-color 0.2s;
   &:active {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: ${COLORS.tealAlpha};
   }
 `;
 

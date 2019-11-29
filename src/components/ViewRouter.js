@@ -33,11 +33,7 @@ export default function ViewRouter() {
     }
     case "chat": {
       return (
-        <ChatView
-          messages={messages}
-          squares={squares}
-          revalidateMessages={revalidateMessages}
-        />
+        <ChatView messages={messages} revalidateMessages={revalidateMessages} />
       );
     }
     default:

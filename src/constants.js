@@ -13,6 +13,10 @@ export const COLORS = {
   teal: teal.string(),
   tealDark: teal.darken(0.25).string(),
   tealLight: teal.lighten(0.75).string(),
+  tealAlpha: teal
+    .alpha(0.1)
+    .hsl()
+    .string(),
   orange: orange.string(),
   orangeDark: orange.darken(0.25).string(),
   orangeLight: orange.lighten(0.75).string(),

@@ -4,13 +4,11 @@
 
 - POSTER VIEW:
   - fix upload. show error. why don't some images work?
-  - add some header image, add height to location offset logic
   - view header image like square
   - add logic to zoom out button
   - swipes to navigate squares & maybe zoom out
 - UI:
   - make it responsive
-  - favicon!
   - show a weird message when it's in portrait
 - POSTER DESIGN:
   - design header of poster, upload it

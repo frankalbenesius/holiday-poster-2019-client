@@ -103,7 +103,7 @@ const PosterViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: ${COLORS.black};
+  background: #333;
 `;
 const PosterArea = styled.div`
   flex: 1 1 auto;

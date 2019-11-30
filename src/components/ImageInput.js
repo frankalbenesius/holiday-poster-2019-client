@@ -7,6 +7,7 @@ export default function ImageInput({ passphrase, afterSubmit }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const [file, setFile] = React.useState();
+  const inputRef = React.useRef(null);
 
   function handleImageSubmit(e) {
     e.preventDefault();
@@ -22,18 +23,27 @@ export default function ImageInput({ passphrase, afterSubmit }) {
         body: formData
       })
         .then(res => {
-          if (!res.ok) {
-            res.json().then(err => {
-              if (err.message) {
-                setError(err.message);
-              } else {
-                setError("Something went wrong.");
-              }
-            });
+          if (res.ok) {
+            setFile(undefined);
+          } else {
+            try {
+              res.json().then(err => {
+                if (err.message) {
+                  setError(err.message);
+                } else {
+                  setError("Something went wrong.");
+                }
+              });
+            } catch (err) {
+              setError("Something went wrong.");
+            }
           }
         })
+        .catch(err => {
+          console.warn("Error:", err);
+          setError("Something went wrong.");
+        })
         .finally(() => {
-          setFile(undefined);
           setLoading(false);
           afterSubmit();
         });
@@ -47,6 +57,13 @@ export default function ImageInput({ passphrase, afterSubmit }) {
     const file = e.target.files[0];
     setFile(file);
   }
+  // actually reset the file input's value to null if the file is undefined
+  // keeps it in sync
+  React.useEffect(() => {
+    if (file === undefined && inputRef.current) {
+      inputRef.current.value = null;
+    }
+  }, [file]);
 
   return (
     <Form onSubmit={handleImageSubmit}>
@@ -68,6 +85,7 @@ export default function ImageInput({ passphrase, afterSubmit }) {
       {error && <ErrorMessage>{error}</ErrorMessage>}
 
       <HiddenInput
+        ref={inputRef}
         id="image_input"
         type="file"
         onChange={handleImageChange}

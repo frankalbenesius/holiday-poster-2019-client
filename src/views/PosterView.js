@@ -5,13 +5,13 @@ import styled from "@emotion/styled";
 import SquareViewer from "../components/SquareViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
 import PassphraseChecker from "../components/PassphraseChecker";
-import { CELL_COUNT } from "../constants";
+import { CELL_COUNT, LOCATION_KEY } from "../constants";
 import LoadingScreen from "../components/LoadingScreen";
 import SquareMetaBar from "../components/SquareMetaBar";
 import ImageInput from "../components/ImageInput";
 
 export default function PosterView({ squares, revalidateSquares }) {
-  const [defaultLocation] = useLocalStorage("defaultLocation");
+  const [defaultLocation] = useLocalStorage(LOCATION_KEY);
 
   const [location, setLocation] = React.useState(
     defaultLocation ? parseLocationStr(defaultLocation) : getRandomLocation()
@@ -85,7 +85,12 @@ export default function PosterView({ squares, revalidateSquares }) {
           renderWithPassphrase={passphrase => (
             <ImageInput
               passphrase={passphrase}
-              revalidateSquares={revalidateSquares}
+              afterSubmit={() => {
+                revalidateSquares();
+                if (defaultLocation) {
+                  setLocation(parseLocationStr(defaultLocation));
+                }
+              }}
             />
           )}
         />

@@ -3,12 +3,11 @@ import useLocalStorage from "react-use-localstorage";
 import fetch from "unfetch";
 
 import TextForm from "./TextForm";
+import { PASSPHRASE_KEY, LOCATION_KEY } from "../constants";
 
 export default function PassphraseChecker(props) {
-  const [passphrase, setPassphrase] = useLocalStorage("passphrase", "");
-  const [defaultLocation, setDefaultLocation] = useLocalStorage(
-    "defaultLocation"
-  );
+  const [passphrase, setPassphrase] = useLocalStorage(PASSPHRASE_KEY, "");
+  const [defaultLocation, setDefaultLocation] = useLocalStorage(LOCATION_KEY);
 
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
@@ -16,12 +15,13 @@ export default function PassphraseChecker(props) {
   function handlePassphraseSubmit(proposedPassphrase) {
     setError("");
     setLoading(true);
+    const lowercasePassphrase = proposedPassphrase.toLowerCase();
     fetch("https://poster-api.frank.dev/locate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ passphrase: proposedPassphrase.toLowerCase() })
+      body: JSON.stringify({ passphrase: lowercasePassphrase })
     })
       .then(res => {
         if (res.ok) {
@@ -38,7 +38,7 @@ export default function PassphraseChecker(props) {
       })
       .then(({ location }) => {
         if (location) {
-          setPassphrase(proposedPassphrase);
+          setPassphrase(lowercasePassphrase);
           if (location.every(x => x > -1)) {
             setDefaultLocation(location.toString());
           }

@@ -2,12 +2,12 @@ import React from "react";
 import styled from "@emotion/styled";
 import useLocalStorage from "react-use-localstorage";
 
-import { CELL_COUNT, COLORS } from "../../constants";
+import { CELL_COUNT, COLORS, LOCATION_KEY } from "../../constants";
 import { SquarePaddingPush } from "./AdjacentSquareDimmer";
 import { parseLocationStr } from "../../lib/util";
 
 export default function PosterControls(props) {
-  const [defaultLocation] = useLocalStorage("defaultLocation");
+  const [defaultLocation] = useLocalStorage(LOCATION_KEY);
 
   return (
     <PosterControlsWrapper>

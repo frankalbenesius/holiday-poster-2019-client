@@ -32,3 +32,6 @@ export const CELL_COUNT = {
 
 // export const API_URL = "http://localhost:3001";
 export const API_URL = "https://poster-api.frank.dev";
+
+export const PASSPHRASE_KEY = "passphrase2";
+export const LOCATION_KEY = "location2";

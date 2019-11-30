@@ -3,7 +3,7 @@ import fetch from "unfetch";
 import styled from "@emotion/styled";
 import { API_URL, COLORS } from "../constants";
 
-export default function ImageInput({ passphrase, revalidateSquares }) {
+export default function ImageInput({ passphrase, afterSubmit }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const [file, setFile] = React.useState();
@@ -35,7 +35,7 @@ export default function ImageInput({ passphrase, revalidateSquares }) {
         .finally(() => {
           setFile(undefined);
           setLoading(false);
-          revalidateSquares();
+          afterSubmit();
         });
     }
   }

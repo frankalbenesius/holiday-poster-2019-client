@@ -2,6 +2,7 @@ import React from "react";
 import fetch from "unfetch";
 import styled from "@emotion/styled";
 import { API_URL, COLORS } from "../constants";
+import ImageTools from "../lib/ImageTools";
 
 export default function ImageInput({ passphrase, afterSubmit }) {
   const [loading, setLoading] = React.useState(false);
@@ -9,24 +10,29 @@ export default function ImageInput({ passphrase, afterSubmit }) {
   const [file, setFile] = React.useState();
   const inputRef = React.useRef(null);
 
-  function handleImageSubmit(e) {
+  async function handleImageSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
     if (!!file && !loading) {
-      const formData = new FormData();
-      formData.append("passphrase", passphrase);
-      formData.append("image", file);
-      setError("");
-      setLoading(true);
-      fetch(API_URL + "/upload", {
-        method: "POST",
-        body: formData
-      })
-        .then(res => {
-          if (res.ok) {
-            setFile(undefined);
-          } else {
-            try {
+      try {
+        const formData = new FormData();
+        formData.append("passphrase", passphrase);
+        const tools = new ImageTools();
+        const resizedBlob = await tools.resize(file, {
+          width: 675,
+          height: 675
+        });
+        formData.append("image", resizedBlob);
+        setError("");
+        setLoading(true);
+        fetch(API_URL + "/upload", {
+          method: "POST",
+          body: formData
+        })
+          .then(res => {
+            if (res.ok) {
+              setFile(undefined);
+            } else {
               res.json().then(err => {
                 if (err.message) {
                   setError(err.message);
@@ -34,19 +40,20 @@ export default function ImageInput({ passphrase, afterSubmit }) {
                   setError("Something went wrong.");
                 }
               });
-            } catch (err) {
-              setError("Something went wrong.");
             }
-          }
-        })
-        .catch(err => {
-          console.warn("Error:", err);
-          setError("Something went wrong.");
-        })
-        .finally(() => {
-          setLoading(false);
-          afterSubmit();
-        });
+          })
+          .catch(err => {
+            console.warn("Error:", err);
+            setError("Something went wrong.");
+          })
+          .finally(() => {
+            setLoading(false);
+            afterSubmit();
+          });
+      } catch (err) {
+        console.warn("Caught err:", err);
+        setError("Something went wrong.");
+      }
     }
   }
 
@@ -65,6 +72,16 @@ export default function ImageInput({ passphrase, afterSubmit }) {
     }
   }, [file]);
 
+  function handleButtonClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (file) {
+      handleImageSubmit(e);
+    } else {
+      console.log("ok");
+    }
+  }
+
   return (
     <Form onSubmit={handleImageSubmit}>
       <Label htmlFor="image_input">Upload an image for your square:</Label>
@@ -78,7 +95,7 @@ export default function ImageInput({ passphrase, afterSubmit }) {
             </>
           )}
         </FakeImageInput>
-        <Button disabled={!file || loading} type="submit">
+        <Button onClick={handleButtonClick} disabled={loading} type="submit">
           {loading ? <i className="fas fa-spinner fa-pulse"></i> : "Submit"}
         </Button>
       </InputAndSubmitWrapper>

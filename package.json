@@ -7,6 +7,7 @@
     "@emotion/styled": "^10.0.23",
     "color": "^3.1.2",
     "date-fns": "^2.8.1",
+    "exif-js": "^2.3.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",

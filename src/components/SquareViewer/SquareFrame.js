@@ -12,10 +12,8 @@ export default function SquareFrame(props) {
 }
 
 const SquareFrameWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  flex: 0 0 auto;
   width: 70%;
-  margin: 15%;
-  background: #999;
+  max-width: 400px;
 `;

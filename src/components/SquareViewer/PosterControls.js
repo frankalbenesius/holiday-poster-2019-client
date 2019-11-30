@@ -3,31 +3,33 @@ import styled from "@emotion/styled";
 import useLocalStorage from "react-use-localstorage";
 
 import { CELL_COUNT, COLORS, LOCATION_KEY } from "../../constants";
-import { SquarePaddingPush } from "./AdjacentSquareDimmer";
+import { SquarePaddingPush, AbsoluteWrapper } from "./AdjacentSquareDimmer";
 import { parseLocationStr } from "../../lib/util";
 
 export default function PosterControls(props) {
   const [defaultLocation] = useLocalStorage(LOCATION_KEY);
 
   return (
-    <PosterControlsWrapper>
-      <SquarePaddingPush />
-      <UpArrow
-        location={props.location}
-        onLocationChange={props.onLocationChange}
-      />
-      <DownArrow
-        location={props.location}
-        onLocationChange={props.onLocationChange}
-      />
-      <RightArrow
-        location={props.location}
-        onLocationChange={props.onLocationChange}
-      />
-      <LeftArrow
-        location={props.location}
-        onLocationChange={props.onLocationChange}
-      />
+    <AbsoluteWrapper>
+      <SquarePositioningHelper>
+        <SquarePaddingPush />
+        <UpArrow
+          location={props.location}
+          onLocationChange={props.onLocationChange}
+        />
+        <DownArrow
+          location={props.location}
+          onLocationChange={props.onLocationChange}
+        />
+        <RightArrow
+          location={props.location}
+          onLocationChange={props.onLocationChange}
+        />
+        <LeftArrow
+          location={props.location}
+          onLocationChange={props.onLocationChange}
+        />
+      </SquarePositioningHelper>
       {defaultLocation && (
         <HomeButton
           onClick={() =>
@@ -36,19 +38,20 @@ export default function PosterControls(props) {
         />
       )}
       <ZoomButton />
-    </PosterControlsWrapper>
+    </AbsoluteWrapper>
   );
 }
 
 function HomeButton(props) {
   return (
     <ButtonWrapper
-      top={"85%"}
+      bottom={"0"}
       left={"0"}
       width={"15%"}
-      height={"15%"}
+      // height={"15%"}
       onClick={props.onClick}
     >
+      <SquarePaddingPush />
       <i className="fas fa-home"></i>
     </ButtonWrapper>
   );
@@ -57,27 +60,31 @@ function HomeButton(props) {
 function ZoomButton(props) {
   return (
     <ButtonWrapper
-      top={"85%"}
-      left={"85%"}
+      bottom={"0"}
+      right={"0"}
       width={"15%"}
-      height={"15%"}
+      // height={"15%"}
       onClick={props.onClick}
     >
+      <SquarePaddingPush />
       <i className="fas fa-search-minus"></i>
     </ButtonWrapper>
   );
 }
 
-const PosterControlsWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+const SquarePositioningHelper = styled.div`
+  box-sizing: content-box;
+  flex: 0 0 auto;
   width: 100%;
+  max-width: 571.42px;
+  position: relative;
 `;
 
 const ButtonWrapper = styled.div`
   top: ${p => p.top};
   left: ${p => p.left};
+  bottom: ${p => p.bottom};
+  right: ${p => p.right};
   width: ${p => p.width};
   height: ${p => p.height};
   position: absolute;

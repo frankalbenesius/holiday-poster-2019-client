@@ -58,7 +58,7 @@ const getLocationInPixels = location => location.map(n => n * 100 + "%");
 
 const createStripesBG = location => {
   const colorA = "#333";
-  const colorB = "#555";
+  const colorB = "#444";
   const isEven = (location[0] + location[1]) % 2 === 0;
   const deg = isEven ? "45" : "-45";
   return `repeating-linear-gradient(

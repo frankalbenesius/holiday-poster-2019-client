@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import SquareViewer from "../components/SquareViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
 import PassphraseChecker from "../components/PassphraseChecker";
-import { CELL_COUNT, LOCATION_KEY } from "../constants";
+import { CELL_COUNT, LOCATION_KEY, COLORS } from "../constants";
 import LoadingScreen from "../components/LoadingScreen";
 import SquareMetaBar from "../components/SquareMetaBar";
 import ImageInput from "../components/ImageInput";
@@ -103,12 +103,15 @@ const PosterViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: ${COLORS.black};
 `;
 const PosterArea = styled.div`
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   overflow-y: scroll;
+  display: flex;
 `;
 const UploadArea = styled.div`
   flex: 0 0 auto;
   padding: 1rem;
+  background: ${COLORS.white};
 `;

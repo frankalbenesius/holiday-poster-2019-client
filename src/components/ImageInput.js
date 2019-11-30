@@ -71,7 +71,7 @@ export default function ImageInput({ passphrase, afterSubmit }) {
         id="image_input"
         type="file"
         onChange={handleImageChange}
-        accept="image/png, image/jpeg, image/gif"
+        accept="image/png, image/jpeg"
       />
     </Form>
   );

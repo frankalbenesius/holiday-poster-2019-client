@@ -1,20 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { SquarePaddingPush } from "./AdjacentSquareDimmer";
 
 export default function PosterFrame(props) {
-  return (
-    <PosterFrameWrapper>
-      <SquarePaddingPush />
-      {props.children}
-    </PosterFrameWrapper>
-  );
+  return <PosterFrameWrapper>{props.children}</PosterFrameWrapper>;
 }
 
 const PosterFrameWrapper = styled.div`
-  flex: 0 0 auto;
-  width: 100%;
-  background: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
   position: relative;
   overflow: hidden;
 `;

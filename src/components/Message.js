@@ -2,10 +2,11 @@ import React from "react";
 import styled from "@emotion/styled";
 import fromUnixTime from "date-fns/fromUnixTime";
 import format from "date-fns/format";
+import { COLORS } from "../constants";
 
 export default function Message({ message }) {
   return (
-    <MessageWrapper>
+    <MessageWrapper isFrank={message.participant.toLowerCase() === "frank"}>
       <MessageMeta>
         <MessageParticipant>{message.participant}</MessageParticipant>
         <MessageTimestamp>{message.timestamp}</MessageTimestamp>
@@ -14,8 +15,10 @@ export default function Message({ message }) {
     </MessageWrapper>
   );
 }
+
 const MessageWrapper = styled.div`
   margin-bottom: 0.5rem;
+  background-color: ${p => (p.isFrank ? COLORS.tealLight : "inherit")};
 `;
 
 const MessageMeta = styled.div`

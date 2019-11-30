@@ -9,6 +9,7 @@
   - swipes to navigate squares & maybe zoom out
 - UI:
   - make it responsive
+  - favicon!
 - POSTER DESIGN:
   - design header of poster, upload it
 - MISC:

@@ -39,6 +39,10 @@ export default function InfoView() {
               If you don't submit an image before 12/28/19, I may give your
               square to someone else. I just want a completed poster!
             </li>
+            <li>
+              For you image professionals, the final size of each square will be
+              2.25in at 300ppi (675px).
+            </li>
             <li>I appreciate you all. Thank you.</li>
           </DetailsUnorderedList>
         </div>

@@ -6,7 +6,7 @@ export default function TextForm(props) {
   const [text, setText] = React.useState("");
 
   function handleSubmit(e) {
-    if (!props.loading) {
+    if (text && !props.loading) {
       e.preventDefault();
       e.stopPropagation();
       props.onSubmit(text);
@@ -19,12 +19,12 @@ export default function TextForm(props) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <InputAndSubmitWrapper>
         <Input
-          name={props.name}
+          id={props.name}
           value={text}
           placeholder={props.placeholder}
           onChange={e => setText(e.target.value)}
         />
-        <Button disabled={props.loading} type="submit">
+        <Button disabled={props.loading || text.length < 1} type="submit">
           {props.loading ? (
             <i className="fas fa-spinner fa-pulse"></i>
           ) : (

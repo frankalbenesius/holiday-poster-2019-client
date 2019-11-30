@@ -8,7 +8,12 @@ export default function PosterSquare(props) {
     <PosterSquareWrapper top={top} left={left} location={props.location}>
       <div>Reserved For</div>
       <ParticipantName>{props.participant}</ParticipantName>
-      <PosterSquareImage alt="" src={props.image} />
+      {props.image && (
+        <>
+          <BlackFill />
+          <PosterSquareImage alt="" src={props.image} />
+        </>
+      )}
     </PosterSquareWrapper>
   );
 }
@@ -18,6 +23,15 @@ const PosterSquareImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
+`;
+
+const BlackFill = styled.div`
+  width: 100%;
+  height: 100%;
+  background: black;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
 
 const ParticipantName = styled.div`

@@ -1,37 +1,129 @@
 import React from "react";
 import fetch from "unfetch";
-import TextForm from "./TextForm";
-import { API_URL } from "../constants";
+import styled from "@emotion/styled";
+import { API_URL, COLORS } from "../constants";
 
-export default function MessageInput({ passphrase, revalidateMessages }) {
+export default function ImageInput({ passphrase, revalidateSquares }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [file, setFile] = React.useState();
 
-  function handleImageSubmit(message) {
-    // setError("");
-    // setLoading(true);
-    // fetch(API_URL + "/messages", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify({ text: message, passphrase })
-    // })
-    //   .then(res => {
-    //     if (!res.ok) {
-    //       res.json().then(err => {
-    //         if (err.message) {
-    //           setError(err.message);
-    //         } else {
-    //           setError("Something went wrong.");
-    //         }
-    //       });
-    //     }
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //     revalidateMessages();
-    //   });
+  function handleImageSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!!file && !loading) {
+      const formData = new FormData();
+      formData.append("passphrase", passphrase);
+      formData.append("image", file);
+      setError("");
+      setLoading(true);
+      fetch(API_URL + "/upload", {
+        method: "POST",
+        body: formData
+      })
+        .then(res => {
+          if (!res.ok) {
+            res.json().then(err => {
+              if (err.message) {
+                setError(err.message);
+              } else {
+                setError("Something went wrong.");
+              }
+            });
+          }
+        })
+        .finally(() => {
+          setFile(undefined);
+          setLoading(false);
+          revalidateSquares();
+        });
+    }
   }
-  return <input type="file" />;
+
+  function handleImageChange(e) {
+    if (!e.target.files[0]) {
+      return;
+    }
+    const file = e.target.files[0];
+    setFile(file);
+  }
+
+  return (
+    <Form onSubmit={handleImageSubmit}>
+      <Label htmlFor="image_input">Upload an image for your square:</Label>
+      <InputAndSubmitWrapper>
+        <FakeImageInput htmlFor="image_input">
+          {file ? (
+            file.name
+          ) : (
+            <>
+              <i className="fas fa-upload"></i>&nbsp; Select an image
+            </>
+          )}
+        </FakeImageInput>
+        <Button disabled={!file || loading} type="submit">
+          {loading ? <i className="fas fa-spinner fa-pulse"></i> : "Submit"}
+        </Button>
+      </InputAndSubmitWrapper>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+
+      <HiddenInput
+        id="image_input"
+        type="file"
+        onChange={handleImageChange}
+        accept="image/png, image/jpeg, image/gif"
+      />
+    </Form>
+  );
 }
+
+const Form = styled.form``;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.25rem;
+  width: 100%;
+`;
+
+const InputAndSubmitWrapper = styled.div`
+  display: flex;
+`;
+
+const FakeImageInput = styled.label`
+  padding: 1rem 1rem;
+  font-size: 1em;
+  display: block;
+  flex: 1 0;
+  border: 1px solid ${COLORS.tealDark};
+  border-radius: 3px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+const Button = styled.button`
+  flex: 0 0;
+  padding: 1rem 1rem;
+  margin-left: 0.5rem;
+  display: block;
+  background: ${COLORS.teal};
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+`;
+
+const HiddenInput = styled.input`
+  opacity: 0;
+  position: absolute;
+  left: -100px;
+  top: -100px;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+`;
+
+const ErrorMessage = styled.div`
+  margin: 0.25em 0;
+  color: red;
+  font-size: 0.9em;
+`;

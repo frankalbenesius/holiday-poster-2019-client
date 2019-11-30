@@ -21,7 +21,7 @@ export default function PassphraseChecker(props) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ passphrase: proposedPassphrase })
+      body: JSON.stringify({ passphrase: proposedPassphrase.toLowerCase() })
     })
       .then(res => {
         if (res.ok) {

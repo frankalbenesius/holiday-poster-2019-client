@@ -10,7 +10,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import SquareMetaBar from "../components/SquareMetaBar";
 import ImageInput from "../components/ImageInput";
 
-export default function PosterView({ squares }) {
+export default function PosterView({ squares, revalidateSquares }) {
   const [defaultLocation] = useLocalStorage("defaultLocation");
 
   const [location, setLocation] = React.useState(
@@ -83,7 +83,10 @@ export default function PosterView({ squares }) {
       <UploadArea>
         <PassphraseChecker
           renderWithPassphrase={passphrase => (
-            <ImageInput passphrase={passphrase} />
+            <ImageInput
+              passphrase={passphrase}
+              revalidateSquares={revalidateSquares}
+            />
           )}
         />
       </UploadArea>

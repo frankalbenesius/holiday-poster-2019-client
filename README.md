@@ -3,10 +3,10 @@
 ## TODO
 
 - POSTER VIEW:
-  - upload image if passphrase
-  - zoom out button
-  - view header image, add header image
-  - swipes to navigate squares, zoom out?
+  - add some header image, add height to location offset logic
+  - view header image like square
+  - add logic to zoom out button
+  - swipes to navigate squares & maybe zoom out
 - UI:
   - make it responsive
 - POSTER DESIGN:
@@ -14,6 +14,7 @@
 - MISC:
   - create "test" recipient list for work testing
   - create printouts for work testing on monday
+  - remember to change the localstorage key for passphrases before production
 - POSTCARDS:
   - design postcard illustration for plotting
   - design postcard context for plotting

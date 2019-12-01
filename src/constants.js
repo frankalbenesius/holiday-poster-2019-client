@@ -36,8 +36,8 @@ export const API_URL = "https://poster-api.frank.dev";
 export const HEADER_URL =
   "https://storage.googleapis.com/holiday-poster-2019.appspot.com/header.png";
 
-export const PASSPHRASE_KEY = "passphrase2";
-export const LOCATION_KEY = "location2";
+export const PASSPHRASE_KEY = "passphrase_test_at_1904";
+export const LOCATION_KEY = "location";
 
 export const BREAKPOINTS = {
   medium: "800px",

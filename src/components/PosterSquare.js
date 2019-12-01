@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { COLORS } from "../constants";
+import { COLORS, CELL_COUNT } from "../constants";
 
 export default function PosterSquare(props) {
+  const [x, y] = props.location;
+  if (x < 0 || y < 0 || x >= CELL_COUNT.x || y >= CELL_COUNT.y) {
+    return null;
+  }
+
   const [left, top] = getLocationInPixels(props.location);
 
   return (

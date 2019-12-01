@@ -39,9 +39,7 @@ export default function PassphraseChecker(props) {
       .then(({ location }) => {
         if (location) {
           setPassphrase(lowercasePassphrase);
-          if (location.every(x => x > -1)) {
-            setDefaultLocation(location.toString());
-          }
+          setDefaultLocation(location.toString());
         } else {
           setError("Not a valid passphrase, bud.");
         }

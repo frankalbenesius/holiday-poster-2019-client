@@ -38,9 +38,12 @@ export default function PosterControls(props) {
       </SquarePositioningHelper>
       {defaultLocation && (
         <HomeButton
-          onClick={() =>
-            props.onLocationChange(parseLocationStr(defaultLocation))
-          }
+          onClick={() => {
+            const newLocation = parseLocationStr(defaultLocation);
+            if (newLocation.every(v => v >= 0)) {
+              props.onLocationChange();
+            }
+          }}
         />
       )}
       <ZoomButton

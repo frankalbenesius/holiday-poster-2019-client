@@ -50,19 +50,25 @@ export default function PosterView({
   imageInputId
 }) {
   const [defaultLocation] = useLocalStorage(LOCATION_KEY);
+  const parsedLocationString = parseLocationStr(defaultLocation);
+  const initialLocation =
+    parsedLocationString && parsedLocationString.every(v => v >= 0)
+      ? parsedLocationString
+      : getRandomLocation();
   const [state, setState] = React.useState({
-    location: defaultLocation
-      ? parseLocationStr(defaultLocation)
-      : getRandomLocation(),
+    location: initialLocation,
     zoomedOut: false
   });
 
   React.useEffect(() => {
     if (defaultLocation) {
-      setState(state => ({
-        ...state,
-        location: parseLocationStr(defaultLocation)
-      }));
+      const parsedLocationString = parseLocationStr(defaultLocation);
+      if (parsedLocationString.every(v => v >= 0)) {
+        setState(state => ({
+          ...state,
+          location: parseLocationStr(defaultLocation)
+        }));
+      }
     }
   }, [defaultLocation]);
 
@@ -85,8 +91,10 @@ export default function PosterView({
     function handleKeyDown(event) {
       if (!state.zoomedOut) {
         const { key } = event;
-        const direction = key.substring(5).toLowerCase();
-        move(state, setState, direction);
+        if (key) {
+          const direction = key.substring(5).toLowerCase();
+          move(state, setState, direction);
+        }
       }
     }
     document.addEventListener("keydown", handleKeyDown);
@@ -128,23 +136,27 @@ export default function PosterView({
       <UploadArea>
         <PassphraseChecker
           label="Enter your passphrase to upload an image:"
-          renderWithPassphrase={passphrase => (
-            <ImageInput
-              passphrase={passphrase}
-              inputId={imageInputId}
-              afterSubmit={() => {
-                revalidateSquares();
-                setState(state => {
-                  return {
-                    location: defaultLocation
-                      ? parseLocationStr(defaultLocation)
-                      : state.location,
-                    zoomedOut: false
-                  };
-                });
-              }}
-            />
-          )}
+          renderWithPassphrase={passphrase => {
+            const usersLocation = parseLocationStr(defaultLocation);
+            if (usersLocation.some(v => v < 0)) {
+              return <div>You can't upload an image, Frank.</div>;
+            }
+            return (
+              <ImageInput
+                passphrase={passphrase}
+                inputId={imageInputId}
+                afterSubmit={() => {
+                  revalidateSquares();
+                  setState(state => {
+                    return {
+                      location: usersLocation ? usersLocation : state.location,
+                      zoomedOut: false
+                    };
+                  });
+                }}
+              />
+            );
+          }}
         />
       </UploadArea>
     </PosterViewWrapper>

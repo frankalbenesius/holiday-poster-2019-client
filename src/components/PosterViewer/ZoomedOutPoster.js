@@ -11,6 +11,9 @@ export default function ZoomedOutPoster({ squares, onLocationClick }) {
       <HeaderImg src={HEADER_URL} />
       {squares.map(square => {
         const [x, y] = square.location;
+        if (x < 0 || y < 0 || x >= CELL_COUNT.x || y >= CELL_COUNT.y) {
+          return null;
+        }
         const left = (100 / CELL_COUNT.x) * x;
         const bottom = (84.375 / CELL_COUNT.y) * (CELL_COUNT.y - 1 - y);
         return (

@@ -22,7 +22,11 @@ export default function MobileViewRouter({ data }) {
     default:
     case "poster": {
       return (
-        <PosterView squares={squares} revalidateSquares={revalidateSquares} />
+        <PosterView
+          imageInputId="mobile"
+          squares={squares}
+          revalidateSquares={revalidateSquares}
+        />
       );
     }
   }

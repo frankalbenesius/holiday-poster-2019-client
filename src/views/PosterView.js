@@ -44,7 +44,11 @@ function move(state, setState, direction) {
   }
 }
 
-export default function PosterView({ squares, revalidateSquares }) {
+export default function PosterView({
+  squares,
+  revalidateSquares,
+  imageInputId
+}) {
   const [defaultLocation] = useLocalStorage(LOCATION_KEY);
   const [state, setState] = React.useState({
     location: defaultLocation
@@ -127,6 +131,7 @@ export default function PosterView({ squares, revalidateSquares }) {
           renderWithPassphrase={passphrase => (
             <ImageInput
               passphrase={passphrase}
+              inputId={imageInputId}
               afterSubmit={() => {
                 revalidateSquares();
                 setState(state => {

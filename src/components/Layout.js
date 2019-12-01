@@ -20,6 +20,7 @@ export default function Layout(props) {
       </MobileContentWrapper>
       <DesktopPosterViewWrapper>
         <PosterView
+          imageInputId="desktop"
           squares={props.data.squares}
           revalidateSquares={props.data.revalidateSquares}
         />

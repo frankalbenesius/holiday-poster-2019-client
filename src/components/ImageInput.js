@@ -4,7 +4,12 @@ import styled from "@emotion/styled";
 import { API_URL, COLORS } from "../constants";
 import ImageTools from "../lib/ImageTools";
 
-export default function ImageInput({ label, passphrase, afterSubmit }) {
+export default function ImageInput({
+  label,
+  passphrase,
+  afterSubmit,
+  inputId
+}) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const [file, setFile] = React.useState();
@@ -72,13 +77,14 @@ export default function ImageInput({ label, passphrase, afterSubmit }) {
     }
   }, [file]);
 
+  const id = "image_input" + inputId;
   return (
     <Form onSubmit={handleImageSubmit}>
-      <Label htmlFor="image_input">
+      <Label htmlFor={id}>
         {label ? label : "Upload an image for your square:"}
       </Label>
       <InputAndSubmitWrapper>
-        <FakeImageInput htmlFor="image_input">
+        <FakeImageInput htmlFor={id}>
           {file ? (
             file.name
           ) : (
@@ -95,7 +101,7 @@ export default function ImageInput({ label, passphrase, afterSubmit }) {
 
       <HiddenInput
         ref={inputRef}
-        id="image_input"
+        id={id}
         type="file"
         onChange={handleImageChange}
         accept="image/png, image/jpeg"

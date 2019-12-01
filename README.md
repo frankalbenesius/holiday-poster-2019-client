@@ -4,8 +4,6 @@
 
 SUNDAY TODO -
 
-- make it responsive
-- swipes to navigate squares & maybe zoom out
 - create "test" recipient list for work testing
   - create printouts for work testing on monday
 - create a first-draft of final recipient list

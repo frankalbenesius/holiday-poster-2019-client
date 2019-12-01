@@ -1,6 +1,7 @@
 import React from "react";
 import useLocalStorage from "react-use-localstorage";
 import styled from "@emotion/styled";
+import { useSwipeable } from "react-swipeable";
 
 import PosterViewer from "../components/PosterViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
@@ -28,6 +29,32 @@ export default function PosterView({ squares, revalidateSquares }) {
     }
   }, [defaultLocation]);
 
+  const swipeHanders = useSwipeable({
+    onSwipedRight: e => {
+      const [x, y] = state.location;
+      if (x < CELL_COUNT.x - 1) {
+        setState({ ...state, location: [x + 1, y] });
+      }
+    },
+    onSwipedLeft: e => {
+      const [x, y] = state.location;
+      if (x > 0) {
+        setState({ ...state, location: [x - 1, y] });
+      }
+    },
+    onSwipedUp: e => {
+      const [x, y] = state.location;
+      if (y > 0) {
+        setState({ ...state, location: [x, y - 1] });
+      }
+    },
+    onSwipedDown: e => {
+      const [x, y] = state.location;
+      if (y < CELL_COUNT.y - 1) {
+        setState({ ...state, location: [x, y + 1] });
+      }
+    }
+  });
   React.useEffect(() => {
     function handleKeyDown(event) {
       if (!state.zoomedOut) {
@@ -86,7 +113,7 @@ export default function PosterView({ squares, revalidateSquares }) {
         location={state.location}
         squares={squares}
       />
-      <PosterArea>
+      <PosterArea {...swipeHanders}>
         <PosterViewer
           zoomedOut={state.zoomedOut}
           squares={squares}
@@ -110,7 +137,7 @@ export default function PosterView({ squares, revalidateSquares }) {
           label="Enter your passphrase to upload an image:"
           renderWithPassphrase={passphrase => (
             <ImageInput
-              label={`Hi, ${currentSquare.participant}! Enter your passphrase to upload an image:`}
+              label={`Hi, ${currentSquare.participant}! Upload an image:`}
               passphrase={passphrase}
               afterSubmit={() => {
                 revalidateSquares();

@@ -4,7 +4,14 @@ import { COLORS } from "../constants";
 
 export default function PosterStatusBar({ zoomedOut, location, squares }) {
   if (zoomedOut) {
-    return <Wrapper>The Whole Poster</Wrapper>;
+    const percentComplete =
+      squares.filter(s => !!s.image).length / squares.length;
+
+    return (
+      <Wrapper>
+        The Whole Poster &mdash; {Math.round(percentComplete * 100)}% Complete
+      </Wrapper>
+    );
   }
 
   const currentSquare = squares.find(s => {

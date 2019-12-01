@@ -77,6 +77,7 @@ const ShittyChatHeader = styled.div`
   text-transform: uppercase;
 `;
 const ChatViewWrapper = styled.div`
+  background: ${COLORS.pinkLight};
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -90,6 +91,7 @@ const InputArea = styled.div`
   flex: 0 0 auto;
   border-top: 2px solid ${COLORS.tealDark};
   padding: 1rem;
+  background: ${COLORS.white};
 `;
 
 const NoMessagesMessage = styled.div`

@@ -18,7 +18,7 @@ export default function InfoView() {
         <div>
           <b>Your Task: </b>
           <DetailsOrderedList>
-            <li>Go to the "Poster" tab.</li>
+            <li>Go to the "Poster" view.</li>
             <li>Enter the passphrase I sent you.</li>
             <li>Upload an image.</li>
           </DetailsOrderedList>

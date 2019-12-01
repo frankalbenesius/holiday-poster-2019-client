@@ -20,7 +20,7 @@ export const COLORS = {
     .string(),
   orange: orange.string(),
   orangeDark: orange.darken(0.25).string(),
-  orangeLight: orange.lighten(0.75).string(),
+  orangeLight: orange.lighten(0.5).string(),
   pink: pink.string(),
   pinkDark: pink.darken(0.25).string(),
   pinkLight: pink.lighten(0.4).string()

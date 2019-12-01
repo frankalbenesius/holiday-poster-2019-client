@@ -2,17 +2,17 @@ import React from "react";
 import useLocalStorage from "react-use-localstorage";
 import styled from "@emotion/styled";
 
-import SquareViewer from "../components/SquareViewer";
+import PosterViewer from "../components/PosterViewer";
 import { getRandomLocation, parseLocationStr } from "../lib/util";
 import PassphraseChecker from "../components/PassphraseChecker";
 import { CELL_COUNT, LOCATION_KEY, COLORS } from "../constants";
 import LoadingScreen from "../components/LoadingScreen";
-import SquareMetaBar from "../components/SquareMetaBar";
+import PosterStatusBar from "../components/PosterStatusBar";
 import ImageInput from "../components/ImageInput";
 
 export default function PosterView({ squares, revalidateSquares }) {
   const [defaultLocation] = useLocalStorage(LOCATION_KEY);
-
+  const [zoomedOut, setZoomedOut] = React.useState(false);
   const [location, setLocation] = React.useState(
     defaultLocation ? parseLocationStr(defaultLocation) : getRandomLocation()
   );
@@ -25,35 +25,37 @@ export default function PosterView({ squares, revalidateSquares }) {
 
   React.useEffect(() => {
     function handleKeyDown(event) {
-      const { key } = event;
-      const [x, y] = location;
-      switch (key) {
-        case "ArrowRight": {
-          if (x < CELL_COUNT.x - 1) {
-            setLocation([x + 1, y]);
+      if (!zoomedOut) {
+        const { key } = event;
+        const [x, y] = location;
+        switch (key) {
+          case "ArrowRight": {
+            if (x < CELL_COUNT.x - 1) {
+              setLocation([x + 1, y]);
+            }
+            break;
           }
-          break;
-        }
-        case "ArrowLeft": {
-          if (x > 0) {
-            setLocation([x - 1, y]);
+          case "ArrowLeft": {
+            if (x > 0) {
+              setLocation([x - 1, y]);
+            }
+            break;
           }
-          break;
-        }
-        case "ArrowUp": {
-          if (y > 0) {
-            setLocation([x, y - 1]);
+          case "ArrowUp": {
+            if (y > 0) {
+              setLocation([x, y - 1]);
+            }
+            break;
           }
-          break;
-        }
-        case "ArrowDown": {
-          if (y < CELL_COUNT.y - 1) {
-            setLocation([x, y + 1]);
+          case "ArrowDown": {
+            if (y < CELL_COUNT.y - 1) {
+              setLocation([x, y + 1]);
+            }
+            break;
           }
-          break;
-        }
-        default: {
-          break;
+          default: {
+            break;
+          }
         }
       }
     }
@@ -61,31 +63,35 @@ export default function PosterView({ squares, revalidateSquares }) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [location, setLocation]);
+  }, [location, setLocation, zoomedOut]);
 
   if (!squares) {
     return <LoadingScreen />;
   }
 
-  const currentSquare = squares.find(s => {
-    return s.location[0] === location[0] && s.location[1] === location[1];
-  });
   return (
     <PosterViewWrapper>
+      <PosterStatusBar
+        zoomedOut={zoomedOut}
+        location={location}
+        squares={squares}
+      />
       <PosterArea>
-        <SquareViewer
+        <PosterViewer
+          zoomedOut={zoomedOut}
           squares={squares}
           location={location}
           onLocationChange={setLocation}
+          onZoomedOutChange={zoomedOut => setZoomedOut(zoomedOut)}
         />
       </PosterArea>
-      <SquareMetaBar square={currentSquare} />
       <UploadArea>
         <PassphraseChecker
           renderWithPassphrase={passphrase => (
             <ImageInput
               passphrase={passphrase}
               afterSubmit={() => {
+                setZoomedOut(false);
                 revalidateSquares();
                 if (defaultLocation) {
                   setLocation(parseLocationStr(defaultLocation));
@@ -111,6 +117,7 @@ const PosterArea = styled.div`
   display: flex;
 `;
 const UploadArea = styled.div`
+  border-top: 2px solid ${COLORS.tealDark};
   flex: 0 0 auto;
   padding: 1rem;
   background: ${COLORS.white};

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 export default function PosterPositioner(props) {
-  const [x, y] = props.location;
+  const [x, y] = props.location || [0, 0];
   const left = x * -100 + "%";
   const top = y * -100 + "%";
   return (

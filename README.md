@@ -3,7 +3,6 @@
 ## TODO
 
 - POSTER VIEW:
-  - fix upload. show error. why don't some images work?
   - view header image like square
   - add logic to zoom out button
   - swipes to navigate squares & maybe zoom out

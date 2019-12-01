@@ -2,11 +2,18 @@ import React from "react";
 import styled from "@emotion/styled";
 import { COLORS } from "../constants";
 
-export default function SquareMetaBar({ square }) {
+export default function PosterStatusBar({ zoomedOut, location, squares }) {
+  if (zoomedOut) {
+    return <Wrapper>The Poster</Wrapper>;
+  }
+
+  const currentSquare = squares.find(s => {
+    return s.location[0] === location[0] && s.location[1] === location[1];
+  });
   return (
     <Wrapper>
-      <Name>{square.participant}</Name>
-      <Coords>({square.location.join(", ")})</Coords>
+      <Name>{currentSquare.participant}</Name>
+      <Coords>({currentSquare.location.join(", ")})</Coords>
     </Wrapper>
   );
 }

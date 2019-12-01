@@ -13,22 +13,28 @@ export default function PosterControls(props) {
     <AbsoluteWrapper>
       <SquarePositioningHelper>
         <SquarePaddingPush />
-        <UpArrow
-          location={props.location}
-          onLocationChange={props.onLocationChange}
-        />
-        <DownArrow
-          location={props.location}
-          onLocationChange={props.onLocationChange}
-        />
-        <RightArrow
-          location={props.location}
-          onLocationChange={props.onLocationChange}
-        />
-        <LeftArrow
-          location={props.location}
-          onLocationChange={props.onLocationChange}
-        />
+        {!props.zoomedOut && [
+          <UpArrow
+            key={"up"}
+            location={props.location}
+            onLocationChange={props.onLocationChange}
+          />,
+          <DownArrow
+            key={"down"}
+            location={props.location}
+            onLocationChange={props.onLocationChange}
+          />,
+          <RightArrow
+            key={"right"}
+            location={props.location}
+            onLocationChange={props.onLocationChange}
+          />,
+          <LeftArrow
+            key={"left"}
+            location={props.location}
+            onLocationChange={props.onLocationChange}
+          />
+        ]}
       </SquarePositioningHelper>
       {defaultLocation && (
         <HomeButton
@@ -37,7 +43,12 @@ export default function PosterControls(props) {
           }
         />
       )}
-      <ZoomButton />
+      <ZoomButton
+        zoomedOut={props.zoomedOut}
+        onClick={() => {
+          props.onZoomedOutChange(!props.zoomedOut);
+        }}
+      />
     </AbsoluteWrapper>
   );
 }
@@ -48,7 +59,6 @@ function HomeButton(props) {
       bottom={"0"}
       left={"0"}
       width={"15%"}
-      // height={"15%"}
       onClick={props.onClick}
     >
       <SquarePaddingPush />
@@ -58,16 +68,18 @@ function HomeButton(props) {
 }
 
 function ZoomButton(props) {
+  const iconClass = props.zoomedOut
+    ? "fas fa-search-plus"
+    : "fas fa-search-minus";
   return (
     <ButtonWrapper
       bottom={"0"}
       right={"0"}
       width={"15%"}
-      // height={"15%"}
       onClick={props.onClick}
     >
       <SquarePaddingPush />
-      <i className="fas fa-search-minus"></i>
+      <i className={iconClass}></i>
     </ButtonWrapper>
   );
 }
@@ -101,7 +113,7 @@ const ButtonWrapper = styled.div`
 
 function UpArrow(props) {
   const [x, y] = props.location;
-  if (y === 0) {
+  if (y < 1) {
     return null;
   } else {
     return (

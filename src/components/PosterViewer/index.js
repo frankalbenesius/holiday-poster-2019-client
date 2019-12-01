@@ -8,21 +8,29 @@ import AdjacentSquareDimmer from "./AdjacentSquareDimmer";
 import PosterControls from "./PosterControls";
 import PosterHeader from "../PosterHeader";
 
-export default function SquareViewer(props) {
+export default function PosterViewer({
+  onZoomedOutChange,
+  zoomedOut,
+  squares,
+  location,
+  onLocationChange
+}) {
   return (
     <PosterFrame>
       <SquareFrame>
-        <PosterPositioner location={props.location}>
+        <PosterPositioner zoomedOut={zoomedOut} location={location}>
           <PosterHeader />
-          {props.squares.map(square => (
+          {squares.map(square => (
             <PosterSquare key={square.location} {...square} />
           ))}
         </PosterPositioner>
       </SquareFrame>
-      <AdjacentSquareDimmer />
+      {!zoomedOut && <AdjacentSquareDimmer />}
       <PosterControls
-        location={props.location}
-        onLocationChange={props.onLocationChange}
+        zoomedOut={zoomedOut}
+        onZoomedOutChange={onZoomedOutChange}
+        location={location}
+        onLocationChange={onLocationChange}
       />
     </PosterFrame>
   );

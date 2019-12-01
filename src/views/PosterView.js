@@ -11,6 +11,39 @@ import LoadingScreen from "../components/LoadingScreen";
 import PosterStatusBar from "../components/PosterStatusBar";
 import ImageInput from "../components/ImageInput";
 
+function move(state, setState, direction) {
+  const [x, y] = state.location;
+  switch (direction) {
+    case "right": {
+      if (x < CELL_COUNT.x - 1) {
+        setState({ ...state, location: [x + 1, y] });
+      }
+      break;
+    }
+    case "left": {
+      if (x > 0) {
+        setState({ ...state, location: [x - 1, y] });
+      }
+      break;
+    }
+    case "up": {
+      if (y > 0) {
+        setState({ ...state, location: [x, y - 1] });
+      }
+      break;
+    }
+    case "down": {
+      if (y < CELL_COUNT.y - 1) {
+        setState({ ...state, location: [x, y + 1] });
+      }
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+}
+
 export default function PosterView({ squares, revalidateSquares }) {
   const [defaultLocation] = useLocalStorage(LOCATION_KEY);
   const [state, setState] = React.useState({
@@ -31,71 +64,32 @@ export default function PosterView({ squares, revalidateSquares }) {
 
   const swipeHanders = useSwipeable({
     onSwipedRight: e => {
-      const [x, y] = state.location;
-      if (x < CELL_COUNT.x - 1) {
-        setState({ ...state, location: [x + 1, y] });
-      }
+      move(state, setState, "left");
     },
     onSwipedLeft: e => {
-      const [x, y] = state.location;
-      if (x > 0) {
-        setState({ ...state, location: [x - 1, y] });
-      }
+      move(state, setState, "right");
     },
     onSwipedUp: e => {
-      const [x, y] = state.location;
-      if (y > 0) {
-        setState({ ...state, location: [x, y - 1] });
-      }
+      move(state, setState, "down");
     },
     onSwipedDown: e => {
-      const [x, y] = state.location;
-      if (y < CELL_COUNT.y - 1) {
-        setState({ ...state, location: [x, y + 1] });
-      }
+      move(state, setState, "up");
     }
   });
+
   React.useEffect(() => {
     function handleKeyDown(event) {
       if (!state.zoomedOut) {
         const { key } = event;
-        const [x, y] = state.location;
-        switch (key) {
-          case "ArrowRight": {
-            if (x < CELL_COUNT.x - 1) {
-              setState({ ...state, location: [x + 1, y] });
-            }
-            break;
-          }
-          case "ArrowLeft": {
-            if (x > 0) {
-              setState({ ...state, location: [x - 1, y] });
-            }
-            break;
-          }
-          case "ArrowUp": {
-            if (y > 0) {
-              setState({ ...state, location: [x, y - 1] });
-            }
-            break;
-          }
-          case "ArrowDown": {
-            if (y < CELL_COUNT.y - 1) {
-              setState({ ...state, location: [x, y + 1] });
-            }
-            break;
-          }
-          default: {
-            break;
-          }
-        }
+        const direction = key.substring(5).toLowerCase();
+        move(state, setState, direction);
       }
     }
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [state, setState]);
+  }, [state]);
 
   if (!squares) {
     return <LoadingScreen />;

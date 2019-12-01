@@ -16,8 +16,12 @@ export default function InfoView() {
           <b>Goal: </b> Create a poster together.
         </div>
         <div>
-          <b>Your Task: </b> Go to the "Poster" tab. Enter the passphrase I sent
-          you. Upload an image.
+          <b>Your Task: </b>
+          <DetailsOrderedList>
+            <li>Go to the "Poster" tab.</li>
+            <li>Enter the passphrase I sent you.</li>
+            <li>Upload an image.</li>
+          </DetailsOrderedList>
         </div>
         <div>
           <b>Other Things: </b>
@@ -56,12 +60,18 @@ const DetailsUnorderedList = styled.ul`
   margin: 0;
   margin-left: 1.5em;
 `;
+const DetailsOrderedList = styled.ol`
+  padding: 0;
+  margin: 0;
+  margin-left: 1.5em;
+`;
 
 const InfoViewWrapper = styled.div`
   padding: 1rem;
   height: 100%;
-  background-color: ${COLORS.white};
   text-align: center;
+  background-color: ${COLORS.pinkLight};
+  overflow-y: scroll;
 `;
 
 const InfoHeader = styled.div`

@@ -52,9 +52,10 @@ export default function PassphraseChecker(props) {
   }
 
   if (!passphrase || !defaultLocation) {
+    const label = props.label || "Enter your passphrase:";
     return (
       <TextForm
-        label="Enter your passphrase:"
+        label={label}
         name="passphrase_input"
         placeholder="passphrase"
         onSubmit={handlePassphraseSubmit}

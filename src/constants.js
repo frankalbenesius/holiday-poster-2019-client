@@ -40,5 +40,6 @@ export const PASSPHRASE_KEY = "passphrase2";
 export const LOCATION_KEY = "location2";
 
 export const BREAKPOINTS = {
-  desktop: "600px"
+  medium: "800px",
+  large: "1200px"
 };

@@ -12,13 +12,15 @@ export default function ChatView({ messages, revalidateMessages }) {
   const prevMessageCountRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (messages.length > prevMessageCountRef.current) {
+    if (messages && messages.length > prevMessageCountRef.current) {
       messagesEndRef.current.scrollIntoView();
     }
   }, [messages]);
 
   React.useEffect(() => {
-    prevMessageCountRef.current = messages.length;
+    if (messages) {
+      prevMessageCountRef.current = messages.length;
+    }
   });
 
   if (!messages) {
@@ -27,6 +29,7 @@ export default function ChatView({ messages, revalidateMessages }) {
 
   return (
     <ChatViewWrapper>
+      <ShittyChatHeader>CHAT!</ShittyChatHeader>
       <MessagesArea>
         {messages.length < 1 && (
           <NoMessagesMessage>
@@ -47,6 +50,7 @@ export default function ChatView({ messages, revalidateMessages }) {
       </MessagesArea>
       <InputArea>
         <PassphraseChecker
+          label="Enter your passphrase to start chatting:"
           renderWithPassphrase={passphrase => (
             <MessageInput
               passphrase={passphrase}
@@ -63,6 +67,15 @@ function sortByTimestamp(a, b) {
   return a.timestamp._seconds - b.timestamp._seconds;
 }
 
+const ShittyChatHeader = styled.div`
+  flex: 0 0 auto;
+  padding: 0.2rem 1rem;
+  border-top: 1px solid ${COLORS.tealDark};
+  background: ${COLORS.pinkDark};
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
 const ChatViewWrapper = styled.div`
   display: flex;
   flex-direction: column;

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { API_URL, COLORS } from "../constants";
 import ImageTools from "../lib/ImageTools";
 
-export default function ImageInput({ passphrase, afterSubmit }) {
+export default function ImageInput({ label, passphrase, afterSubmit }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const [file, setFile] = React.useState();
@@ -74,7 +74,9 @@ export default function ImageInput({ passphrase, afterSubmit }) {
 
   return (
     <Form onSubmit={handleImageSubmit}>
-      <Label htmlFor="image_input">Upload an image for your square:</Label>
+      <Label htmlFor="image_input">
+        {label ? label : "Upload an image for your square:"}
+      </Label>
       <InputAndSubmitWrapper>
         <FakeImageInput htmlFor="image_input">
           {file ? (
@@ -102,7 +104,9 @@ export default function ImageInput({ passphrase, afterSubmit }) {
   );
 }
 
-const Form = styled.form``;
+const Form = styled.form`
+  max-width: 500px;
+`;
 
 const Label = styled.label`
   display: block;

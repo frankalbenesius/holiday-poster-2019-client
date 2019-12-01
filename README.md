@@ -2,19 +2,19 @@
 
 ## TODO
 
-- POSTER VIEW:
-  - zoom out poster on wide screens
-  - swipes to navigate squares & maybe zoom out
-- UI:
-  - make it responsive
-  - show a weird message when it's in portrait
-- POSTER DESIGN:
-  - design header of poster, upload it
-- MISC:
-  - create "test" recipient list for work testing
+SUNDAY TODO -
+
+- make it responsive
+- swipes to navigate squares & maybe zoom out
+- create "test" recipient list for work testing
   - create printouts for work testing on monday
+- create a first-draft of final recipient list
+
+* POSTER DESIGN:
+  - design better header of poster, upload it
+* MISC:
   - remember to change the localstorage key for passphrases before production
-- POSTCARDS:
+* POSTCARDS:
   - design postcard illustration for plotting
   - design postcard context for plotting
   - finalize list of recipients & their passphrases

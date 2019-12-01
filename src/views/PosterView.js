@@ -95,11 +95,6 @@ export default function PosterView({ squares, revalidateSquares }) {
     return <LoadingScreen />;
   }
 
-  const currentSquare = squares.find(s => {
-    return (
-      s.location[0] === state.location[0] && s.location[1] === state.location[1]
-    );
-  });
   return (
     <PosterViewWrapper>
       <PosterStatusBar
@@ -131,7 +126,6 @@ export default function PosterView({ squares, revalidateSquares }) {
           label="Enter your passphrase to upload an image:"
           renderWithPassphrase={passphrase => (
             <ImageInput
-              label={`Hi, ${currentSquare.participant}! Upload an image:`}
               passphrase={passphrase}
               afterSubmit={() => {
                 revalidateSquares();

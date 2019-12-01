@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { COLORS } from "../constants";
+import { COLORS, LOCATION_KEY } from "../constants";
+import useLocalStorage from "react-use-localstorage";
+import { parseLocationStr } from "../lib/util";
 
 export default function PosterStatusBar({ zoomedOut, location, squares }) {
+  const [defaultLocation] = useLocalStorage(LOCATION_KEY);
+
   if (zoomedOut) {
     const percentComplete =
       squares.filter(s => !!s.image).length / squares.length;
@@ -15,11 +19,23 @@ export default function PosterStatusBar({ zoomedOut, location, squares }) {
   }
 
   const currentSquare = squares.find(s => {
-    return s.location[0] === location[0] && s.location[1] === location[1];
+    return s.location.toString() === location.toString();
   });
+  const name = currentSquare.participant;
+
+  let showYou = false;
+  if (defaultLocation) {
+    const parsedStoredLocation = parseLocationStr(defaultLocation);
+    if (parsedStoredLocation.toString() === location.toString()) {
+      showYou = true;
+    }
+  }
+
   return (
     <Wrapper>
-      <Name>{currentSquare.participant}</Name>
+      <Name>
+        {name} {showYou && <You>You!</You>}
+      </Name>
       <Coords>({currentSquare.location.join(", ")})</Coords>
     </Wrapper>
   );
@@ -33,6 +49,11 @@ const Coords = styled.div`
 const Name = styled.div`
   flex: 0 0 auto;
   margin: 0 0.25rem;
+`;
+const You = styled.span`
+  color: ${COLORS.teal};
+  padding-left: 0.25rem;
+  font-style: italic;
 `;
 const Wrapper = styled.div`
   text-align: center;

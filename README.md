@@ -3,8 +3,7 @@
 ## TODO
 
 - POSTER VIEW:
-  - view header image like square
-  - add logic to zoom out button
+  - zoom out poster on wide screens
   - swipes to navigate squares & maybe zoom out
 - UI:
   - make it responsive

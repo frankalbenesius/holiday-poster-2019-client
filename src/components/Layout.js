@@ -15,10 +15,10 @@ export default function Layout(props) {
           <Ticker>
             {({ index }) => {
               let text = APP_TITLE;
-              if (index > 0 && index % 16 === 0) {
-                text = "She's a part-time frozen yogurt chef.";
-              }
               if (index > 0 && index % 9 === 0) {
+                text = "P.S. I Frank You";
+              }
+              if (index > 0 && index % 16 === 0) {
                 text = "Alligators. Dingo babies.";
               }
               if (index > 0 && index % 6 === 0) {

@@ -72,16 +72,6 @@ export default function ImageInput({ passphrase, afterSubmit }) {
     }
   }, [file]);
 
-  function handleButtonClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (file) {
-      handleImageSubmit(e);
-    } else {
-      console.log("ok");
-    }
-  }
-
   return (
     <Form onSubmit={handleImageSubmit}>
       <Label htmlFor="image_input">Upload an image for your square:</Label>
@@ -95,7 +85,7 @@ export default function ImageInput({ passphrase, afterSubmit }) {
             </>
           )}
         </FakeImageInput>
-        <Button onClick={handleButtonClick} disabled={loading} type="submit">
+        <Button disabled={!file || loading} type="submit">
           {loading ? <i className="fas fa-spinner fa-pulse"></i> : "Submit"}
         </Button>
       </InputAndSubmitWrapper>

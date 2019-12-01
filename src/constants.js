@@ -8,7 +8,8 @@ export const COLORS = {
   black: "#000",
   grayLight: "#cfd3d7",
   gray: "#adb4b9",
-  grayDark: "#7f8b93",
+  grayDark: "#444",
+  grayDarker: "#333",
   white: "#fff",
   teal: teal.string(),
   tealDark: teal.darken(0.25).string(),
@@ -32,6 +33,8 @@ export const CELL_COUNT = {
 
 // export const API_URL = "http://localhost:3001";
 export const API_URL = "https://poster-api.frank.dev";
+export const HEADER_URL =
+  "https://storage.googleapis.com/holiday-poster-2019.appspot.com/header.png";
 
 export const PASSPHRASE_KEY = "passphrase2";
 export const LOCATION_KEY = "location2";

@@ -4,7 +4,7 @@ import { COLORS } from "../constants";
 
 export default function PosterStatusBar({ zoomedOut, location, squares }) {
   if (zoomedOut) {
-    return <Wrapper>The Poster</Wrapper>;
+    return <Wrapper>The Whole Poster</Wrapper>;
   }
 
   const currentSquare = squares.find(s => {

@@ -20,6 +20,7 @@ export const AbsoluteWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  pointer-events: none;
 `;
 
 // used transparent giant border to dim surrounding area
@@ -29,8 +30,10 @@ const BorderDimmingSolution = styled.div`
   width: 70%;
   max-width: 400px;
   border: 40rem solid rgba(0, 0, 0, 0.25);
+  pointer-events: none;
 `;
 
 export const SquarePaddingPush = styled.div`
   padding-top: 100%;
+  pointer-events: none;
 `;

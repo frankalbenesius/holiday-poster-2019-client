@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { COLORS } from "../constants";
 
 export default function PosterSquare(props) {
   const [left, top] = getLocationInPixels(props.location);
@@ -57,8 +58,8 @@ const PosterSquareWrapper = styled.div`
 const getLocationInPixels = location => location.map(n => n * 100 + "%");
 
 const createStripesBG = location => {
-  const colorA = "#333";
-  const colorB = "#444";
+  const colorA = COLORS.grayDarker;
+  const colorB = COLORS.grayDark;
   const isEven = (location[0] + location[1]) % 2 === 0;
   const deg = isEven ? "45" : "-45";
   return `repeating-linear-gradient(

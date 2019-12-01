@@ -12,44 +12,49 @@ import ImageInput from "../components/ImageInput";
 
 export default function PosterView({ squares, revalidateSquares }) {
   const [defaultLocation] = useLocalStorage(LOCATION_KEY);
-  const [zoomedOut, setZoomedOut] = React.useState(false);
-  const [location, setLocation] = React.useState(
-    defaultLocation ? parseLocationStr(defaultLocation) : getRandomLocation()
-  );
+  const [state, setState] = React.useState({
+    location: defaultLocation
+      ? parseLocationStr(defaultLocation)
+      : getRandomLocation(),
+    zoomedOut: false
+  });
 
   React.useEffect(() => {
     if (defaultLocation) {
-      setLocation(parseLocationStr(defaultLocation));
+      setState(state => ({
+        ...state,
+        location: parseLocationStr(defaultLocation)
+      }));
     }
   }, [defaultLocation]);
 
   React.useEffect(() => {
     function handleKeyDown(event) {
-      if (!zoomedOut) {
+      if (!state.zoomedOut) {
         const { key } = event;
-        const [x, y] = location;
+        const [x, y] = state.location;
         switch (key) {
           case "ArrowRight": {
             if (x < CELL_COUNT.x - 1) {
-              setLocation([x + 1, y]);
+              setState({ ...state, location: [x + 1, y] });
             }
             break;
           }
           case "ArrowLeft": {
             if (x > 0) {
-              setLocation([x - 1, y]);
+              setState({ ...state, location: [x - 1, y] });
             }
             break;
           }
           case "ArrowUp": {
             if (y > 0) {
-              setLocation([x, y - 1]);
+              setState({ ...state, location: [x, y - 1] });
             }
             break;
           }
           case "ArrowDown": {
             if (y < CELL_COUNT.y - 1) {
-              setLocation([x, y + 1]);
+              setState({ ...state, location: [x, y + 1] });
             }
             break;
           }
@@ -63,7 +68,7 @@ export default function PosterView({ squares, revalidateSquares }) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [location, setLocation, zoomedOut]);
+  }, [state, setState]);
 
   if (!squares) {
     return <LoadingScreen />;
@@ -72,17 +77,27 @@ export default function PosterView({ squares, revalidateSquares }) {
   return (
     <PosterViewWrapper>
       <PosterStatusBar
-        zoomedOut={zoomedOut}
-        location={location}
+        zoomedOut={state.zoomedOut}
+        location={state.location}
         squares={squares}
       />
       <PosterArea>
         <PosterViewer
-          zoomedOut={zoomedOut}
+          zoomedOut={state.zoomedOut}
           squares={squares}
-          location={location}
-          onLocationChange={setLocation}
-          onZoomedOutChange={zoomedOut => setZoomedOut(zoomedOut)}
+          location={state.location}
+          onLocationChange={location => {
+            setState({
+              zoomedOut: false,
+              location
+            });
+          }}
+          onZoomedOutChange={zoomedOut =>
+            setState({
+              ...state,
+              zoomedOut
+            })
+          }
         />
       </PosterArea>
       <UploadArea>
@@ -91,11 +106,15 @@ export default function PosterView({ squares, revalidateSquares }) {
             <ImageInput
               passphrase={passphrase}
               afterSubmit={() => {
-                setZoomedOut(false);
                 revalidateSquares();
-                if (defaultLocation) {
-                  setLocation(parseLocationStr(defaultLocation));
-                }
+                setState(state => {
+                  return {
+                    location: defaultLocation
+                      ? parseLocationStr(defaultLocation)
+                      : state.location,
+                    zoomedOut: false
+                  };
+                });
               }}
             />
           )}
@@ -109,11 +128,11 @@ const PosterViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #333;
+  background: ${COLORS.pink};
 `;
 const PosterArea = styled.div`
   flex: 1 1 auto;
-  overflow-y: scroll;
+  overflow: scroll;
   display: flex;
 `;
 const UploadArea = styled.div`

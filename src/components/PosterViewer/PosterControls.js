@@ -90,9 +90,11 @@ const SquarePositioningHelper = styled.div`
   width: 100%;
   max-width: 571.42px;
   position: relative;
+  pointer-events: none;
 `;
 
 const ButtonWrapper = styled.div`
+  pointer-events: auto;
   top: ${p => p.top};
   left: ${p => p.left};
   bottom: ${p => p.bottom};

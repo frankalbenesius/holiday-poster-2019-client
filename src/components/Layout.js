@@ -8,7 +8,7 @@ import AppHeader from "./AppHeader";
 
 export default function Layout(props) {
   return (
-    <LayoutWrapper>
+    <CssGridWrapper>
       <HeaderWrapper>
         <AppHeader />
       </HeaderWrapper>
@@ -18,24 +18,35 @@ export default function Layout(props) {
       <NavWrapper>
         <ViewNav />
       </NavWrapper>
-    </LayoutWrapper>
+    </CssGridWrapper>
   );
 }
 
-const LayoutWrapper = styled.div`
+const CssGridWrapper = styled.div`
   height: 100%;
-  display: flex;
-  flex-direction: column;
   background: ${COLORS.white};
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 0fr 100fr 0fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "nav";
+`;
+
+const HeaderWrapper = styled.div`
+  grid-area: header;
+  background: blue;
 `;
 
 const ContentWrapper = styled.div`
+  grid-area: content;
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  overflow-y: scroll;
+  background: red;
 `;
 
-const NavWrapper = styled.div``;
-const HeaderWrapper = styled.div``;
+const NavWrapper = styled.div`
+  grid-area: nav;
+  background: yellow;
+`;

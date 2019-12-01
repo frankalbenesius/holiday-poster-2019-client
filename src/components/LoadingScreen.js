@@ -10,7 +10,7 @@ export default function LoadingScreen() {
 }
 
 const LoadingScreenWrapper = styled.div`
-  flex: 1 0 auto;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

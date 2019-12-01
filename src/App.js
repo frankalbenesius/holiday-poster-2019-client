@@ -1,15 +1,13 @@
 import React from "react";
 
 import Layout from "./components/Layout";
-import ViewRouter from "./components/ViewRouter";
+import DataProvider from "./components/DataProvider";
 
 export default function App() {
   return (
-    <AppProvider>
-      <Layout>
-        <ViewRouter />
-      </Layout>
-    </AppProvider>
+    <ContextProvider>
+      <DataProvider render={data => <Layout data={data} />} />
+    </ContextProvider>
   );
 }
 
@@ -29,7 +27,7 @@ function reducer(state, action) {
 export const StateContext = React.createContext(null);
 export const DispatchContext = React.createContext(null);
 
-function AppProvider(props) {
+function ContextProvider(props) {
   React.useEffect(() => {
     if (window && window.localStorage) {
       window.localStorage.setItem("hasVisitedBefore", "yep");

@@ -81,6 +81,7 @@ const ChatViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 `;
 const MessagesArea = styled.div`
   flex: 1 1 auto;

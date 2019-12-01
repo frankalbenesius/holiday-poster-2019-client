@@ -3,6 +3,7 @@ import fetch from "unfetch";
 import styled from "@emotion/styled";
 import { API_URL, COLORS } from "../constants";
 import ImageTools from "../lib/ImageTools";
+import { submissionsClosed } from "../hooks/useTimeUntil2020";
 
 export default function ImageInput({
   label,
@@ -78,6 +79,11 @@ export default function ImageInput({
   }, [file]);
 
   const id = "image_input" + inputId;
+
+  if (submissionsClosed()) {
+    return <div>Submissions are closed.</div>;
+  }
+
   return (
     <Form onSubmit={handleImageSubmit}>
       <Label htmlFor={id}>

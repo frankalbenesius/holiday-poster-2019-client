@@ -39,6 +39,8 @@ export const HEADER_URL =
 export const PASSPHRASE_KEY = "passphrase_test_at_1904";
 export const LOCATION_KEY = "location";
 
+export const DEADLINE_DATE = new Date(2020, 0, 1);
+
 export const BREAKPOINTS = {
   medium: "800px",
   large: "1200px"

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { DEADLINE_DATE } from "../constants";
 
 export default function useTimeUntil2020() {
   const [timerText, setTimerText] = useState(
@@ -41,11 +42,15 @@ export function submissionsClosed(optionalTimeValues) {
 
 function getTimeUntil2020() {
   var now = new Date();
-  var endDate = new Date(2020, 0, 1);
+  var endDate = DEADLINE_DATE;
   var difference = endDate.getTime() - now.getTime();
-
   if (difference <= 0) {
-    return "NONE";
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
   } else {
     var seconds = Math.floor(difference / 1000);
     var minutes = Math.floor(seconds / 60);

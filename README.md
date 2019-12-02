@@ -2,11 +2,9 @@
 
 ## TODO
 
-SUNDAY TODO -
-
-- create "test" recipient list for work testing
-  - create printouts for work testing on monday
-- create a first-draft of final recipient list
+* App Updates:
+  - remove scroll bars on desktop, overflow: auto
+  - hover css on zoomed out poster squares
 
 * POSTER DESIGN:
   - design better header of poster, upload it

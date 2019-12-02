@@ -41,7 +41,7 @@ export default function PosterControls(props) {
           onClick={() => {
             const newLocation = parseLocationStr(defaultLocation);
             if (newLocation.every(v => v >= 0)) {
-              props.onLocationChange();
+              props.onLocationChange(newLocation);
             }
           }}
         />

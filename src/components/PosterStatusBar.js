@@ -18,6 +18,7 @@ export default function PosterStatusBar({ zoomedOut, location, squares }) {
     );
   }
 
+  console.log("location", location);
   const currentSquare = squares.find(s => {
     return s.location.toString() === location.toString();
   });

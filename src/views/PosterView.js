@@ -138,7 +138,7 @@ export default function PosterView({
           label="Enter your passphrase to upload an image:"
           renderWithPassphrase={passphrase => {
             const usersLocation = parseLocationStr(defaultLocation);
-            if (usersLocation.some(v => v < 0)) {
+            if (usersLocation && usersLocation.some(v => v < 0)) {
               return <div>You can't upload an image, Frank.</div>;
             }
             return (

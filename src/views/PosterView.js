@@ -59,7 +59,6 @@ export default function PosterView({
     location: initialLocation,
     zoomedOut: false
   });
-  console.log("state.location", state.location);
 
   React.useEffect(() => {
     if (defaultLocation) {

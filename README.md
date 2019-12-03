@@ -2,9 +2,6 @@
 
 ## TODO
 
-- App Updates:
-  - track number of times "located"/"authed"? add it to square data?
-  - add google tracking code
 - POSTER DESIGN:
   - design better header of poster, upload it
 - MISC:

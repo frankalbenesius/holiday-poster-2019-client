@@ -65,10 +65,25 @@ function HomeButton(props) {
       onClick={props.onClick}
     >
       <SquarePaddingPush />
-      <i className="fas fa-home"></i>
+      <IconDarkSquare>
+        <i className="fas fa-home"></i>
+      </IconDarkSquare>
     </ButtonWrapper>
   );
 }
+
+const IconDarkSquare = styled.div`
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+`;
 
 function ZoomButton(props) {
   const iconClass = props.zoomedOut
@@ -82,7 +97,9 @@ function ZoomButton(props) {
       onClick={props.onClick}
     >
       <SquarePaddingPush />
-      <i className={iconClass}></i>
+      <IconDarkSquare>
+        <i className={iconClass}></i>
+      </IconDarkSquare>
     </ButtonWrapper>
   );
 }

@@ -108,7 +108,7 @@ const DesktopPosterViewWrapper = styled.div`
 const DesktopInfoViewWrapper = styled.div`
   grid-area: info;
   display: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: ${COLORS.pinkLight};
   @media only screen and (min-width: ${BREAKPOINTS.medium}) {
     display: initial;
@@ -119,7 +119,7 @@ const DesktopInfoViewWrapper = styled.div`
 const DesktopChatViewWrapper = styled.div`
   grid-area: chat;
   display: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   @media only screen and (min-width: ${BREAKPOINTS.medium}) {
     display: initial;
   }

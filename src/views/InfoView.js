@@ -71,7 +71,7 @@ const InfoViewWrapper = styled.div`
   height: 100%;
   text-align: center;
   background-color: ${COLORS.pinkLight};
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const InfoHeader = styled.div`

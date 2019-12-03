@@ -172,7 +172,7 @@ const PosterViewWrapper = styled.div`
 `;
 const PosterArea = styled.div`
   flex: 1 1 auto;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
 `;
 const UploadArea = styled.div`

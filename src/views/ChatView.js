@@ -86,7 +86,7 @@ const ChatViewWrapper = styled.div`
 const MessagesArea = styled.div`
   flex: 1 1 auto;
   padding: 1rem 1rem 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 const InputArea = styled.div`
   flex: 0 0 auto;

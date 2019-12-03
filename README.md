@@ -2,16 +2,19 @@
 
 ## TODO
 
-* App Updates:
-  - remove scroll bars on desktop, overflow: auto
+- App Updates:
   - hover css on zoomed out poster squares
   - track number of times "located"/"authed"? add it to square data?
-
-* POSTER DESIGN:
+  - update sizes of zoomed out poster, poster square on different breakpoints
+  - put persons image next to their message
+  - put black behind zoomed out square images
+  - autocomplete="off" on chat input
+  - add google tracking code
+- POSTER DESIGN:
   - design better header of poster, upload it
-* MISC:
+- MISC:
   - remember to change the localstorage key for passphrases before production
-* POSTCARDS:
+- POSTCARDS:
   - design postcard illustration for plotting
   - design postcard context for plotting
   - finalize list of recipients & their passphrases

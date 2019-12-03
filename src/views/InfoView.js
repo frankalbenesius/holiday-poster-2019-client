@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 
-import { COLORS } from "../constants";
+import { COLORS, BREAKPOINTS } from "../constants";
 
 export const APP_TITLE = "Frank's Collaborative Poster Project 2019";
 
@@ -17,11 +17,17 @@ export default function InfoView() {
         </div>
         <div>
           <b>Your Task: </b>
-          <DetailsOrderedList>
-            <li>Go to the "Poster" view.</li>
+          <MobileTasks>
+            <li>Go to the "Poster" tab.</li>
             <li>Enter the passphrase I sent you.</li>
             <li>Upload an image.</li>
-          </DetailsOrderedList>
+          </MobileTasks>
+          <DesktopTasks>
+            <li>
+              In the input below the poster, enter the passphrase I sent you.
+            </li>
+            <li>Upload an image.</li>
+          </DesktopTasks>
         </div>
         <div>
           <b>Other Things: </b>
@@ -55,12 +61,26 @@ export default function InfoView() {
   );
 }
 
-const DetailsUnorderedList = styled.ul`
+const MobileTasks = styled.ol`
+  display: block;
   padding: 0;
   margin: 0;
   margin-left: 1.5em;
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    display: none;
+  }
 `;
-const DetailsOrderedList = styled.ol`
+const DesktopTasks = styled.ol`
+  display: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 1.5em;
+  @media only screen and (min-width: ${BREAKPOINTS.medium}) {
+    display: block;
+  }
+`;
+
+const DetailsUnorderedList = styled.ul`
   padding: 0;
   margin: 0;
   margin-left: 1.5em;

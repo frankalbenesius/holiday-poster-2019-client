@@ -45,6 +45,9 @@ const ZoomedOutPosterWrapper = styled.div`
   width: 100%;
   max-width: 40vh;
   position: relative;
+  @media only screen and (min-width: 700px) {
+    max-width: 50vh;
+  }
 `;
 
 const PosterRatioPusher = styled.div`
@@ -68,9 +71,19 @@ const SquareContainer = styled.div`
   justify-content: center;
   background: ${p => (p.isEven ? COLORS.grayDark : COLORS.grayDarker)};
   color: ${p => (!p.isEven ? COLORS.grayDark : COLORS.grayDarker)};
+  &:hover:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(255, 255, 255, 0.1);
+  }
 `;
 
 const SquareImg = styled.img`
+  background: black;
   width: 100%;
   display: block;
 `;

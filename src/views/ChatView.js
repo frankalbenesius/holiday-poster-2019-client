@@ -7,7 +7,11 @@ import { COLORS } from "../constants";
 import Message from "../components/Message";
 import LoadingScreen from "../components/LoadingScreen";
 
-export default function ChatView({ messages, revalidateMessages }) {
+export default function ChatView({
+  messages,
+  revalidateMessages,
+  squares = []
+}) {
   const messagesEndRef = React.useRef(null);
   const prevMessageCountRef = React.useRef(null);
 
@@ -39,8 +43,12 @@ export default function ChatView({ messages, revalidateMessages }) {
           </NoMessagesMessage>
         )}
         {messages.sort(sortByTimestamp).map(message => {
+          const square = squares.find(
+            sq => sq.participant === message.participant
+          );
           return (
             <Message
+              square={square}
               message={message}
               key={JSON.stringify(message.timestamp)}
             />
@@ -85,7 +93,7 @@ const ChatViewWrapper = styled.div`
 `;
 const MessagesArea = styled.div`
   flex: 1 1 auto;
-  padding: 1rem 1rem 0;
+  padding: 1rem 0.5rem 0;
   overflow-y: auto;
 `;
 const InputArea = styled.div`

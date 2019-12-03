@@ -15,7 +15,7 @@ export default function TextForm(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} autoComplete="off">
       <Label htmlFor={props.name}>{props.label}</Label>
       <InputAndSubmitWrapper>
         <Input

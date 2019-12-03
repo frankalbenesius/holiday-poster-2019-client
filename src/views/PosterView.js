@@ -57,7 +57,7 @@ export default function PosterView({
       : getRandomLocation();
   const [state, setState] = React.useState({
     location: initialLocation,
-    zoomedOut: false
+    zoomedOut: true
   });
 
   React.useEffect(() => {

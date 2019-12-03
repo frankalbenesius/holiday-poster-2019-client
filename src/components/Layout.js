@@ -30,6 +30,7 @@ export default function Layout(props) {
       </DesktopInfoViewWrapper>
       <DesktopChatViewWrapper>
         <ChatView
+          squares={props.data.squares}
           messages={props.data.messages}
           revalidateMessages={props.data.revalidateMessages}
         />

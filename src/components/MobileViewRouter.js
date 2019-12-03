@@ -16,7 +16,11 @@ export default function MobileViewRouter({ data }) {
     }
     case "chat": {
       return (
-        <ChatView messages={messages} revalidateMessages={revalidateMessages} />
+        <ChatView
+          squares={squares}
+          messages={messages}
+          revalidateMessages={revalidateMessages}
+        />
       );
     }
     default:

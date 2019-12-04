@@ -66,8 +66,28 @@ function HomeButton(props) {
     >
       <SquarePaddingPush />
       <IconDarkSquare>
-        <i className="fas fa-home"></i>
-        <span>My&nbsp;▣</span>
+        <i className="far fa-square"></i>
+        <span>mine</span>
+      </IconDarkSquare>
+    </ButtonWrapper>
+  );
+}
+
+function ZoomButton(props) {
+  const iconClass = props.zoomedOut
+    ? "fas fa-search-plus"
+    : "fas fa-search-minus";
+  return (
+    <ButtonWrapper
+      bottom={"0"}
+      right={"0"}
+      width={"15%"}
+      onClick={props.onClick}
+    >
+      <SquarePaddingPush />
+      <IconDarkSquare>
+        <i className={iconClass}></i>
+        <span>zoom</span>
       </IconDarkSquare>
     </ButtonWrapper>
   );
@@ -91,26 +111,6 @@ const IconDarkSquare = styled.div`
     background: rgba(0, 0, 0, 0.4);
   }
 `;
-
-function ZoomButton(props) {
-  const iconClass = props.zoomedOut
-    ? "fas fa-search-plus"
-    : "fas fa-search-minus";
-  return (
-    <ButtonWrapper
-      bottom={"0"}
-      right={"0"}
-      width={"15%"}
-      onClick={props.onClick}
-    >
-      <SquarePaddingPush />
-      <IconDarkSquare>
-        <i className={iconClass}></i>
-        <span>Zoom</span>
-      </IconDarkSquare>
-    </ButtonWrapper>
-  );
-}
 
 const SquarePositioningHelper = styled.div`
   box-sizing: content-box;

@@ -6,6 +6,12 @@ import { COLORS, BREAKPOINTS } from "../constants";
 
 export const APP_TITLE = "The Year Was 2019";
 
+const pictureText = `
+  Upload an image that would make you think of 2019.
+  That could be a selfie of you or your family, a picture of your pet,
+  a meme, or something else entirely. There are no rules. 
+`;
+
 export default function InfoView() {
   return (
     <InfoViewWrapper>
@@ -38,7 +44,7 @@ export default function InfoView() {
             color: COLORS.orangeDark
           }}
         >
-          & Grass Fed Collaborative Experience
+          & All-Natural Collaborative Experience
         </div>
       </InfoHeader>
       <WelcomeImg src={`${process.env.PUBLIC_URL}/welcome.gif`} />
@@ -50,27 +56,22 @@ export default function InfoView() {
           <b>Your Task: </b>
           <MobileTasks>
             <li>Go to the "Poster" tab.</li>
-            <li>Enter the passphrase I sent you.</li>
-            <li>Upload an image.</li>
+            <li>Submit the passphrase I sent you.</li>
+            <li>{pictureText}</li>
           </MobileTasks>
           <DesktopTasks>
             <li>
-              In the input below the poster, enter the passphrase I sent you.
+              In the input below the poster, submit the passphrase I sent you.
             </li>
-            <li>Upload an image.</li>
+            <li>{pictureText}</li>
           </DesktopTasks>
         </InfoContentBlock>
         <InfoContentBlock>
-          <b>Other Things: </b>
+          <b>Other Details:</b>
           <DetailsUnorderedList>
             <li>
               On 1/1/2020 submissions will close and I will print the poster and
               hang it up in my home forever.
-            </li>
-            <li>
-              Don't know what to upload? Submit a bad selfie or a pic of a neat
-              squirrel or something. You can always upload a different photo
-              later.
             </li>
             <li>
               If you're feeling ambitious, you could use the "Chat" tab to

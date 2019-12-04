@@ -27,7 +27,7 @@ export default function() {
                 break;
               }
               case 2: {
-                text = <i>& Grass Fed Collaborative Experience</i>;
+                text = <i>& All-Natural Collaborative Experience</i>;
                 break;
               }
               case 3: {

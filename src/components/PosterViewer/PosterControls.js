@@ -67,6 +67,7 @@ function HomeButton(props) {
       <SquarePaddingPush />
       <IconDarkSquare>
         <i className="fas fa-home"></i>
+        <span>My&nbsp;▣</span>
       </IconDarkSquare>
     </ButtonWrapper>
   );
@@ -75,11 +76,17 @@ function HomeButton(props) {
 const IconDarkSquare = styled.div`
   background: rgba(0, 0, 0, 0.25);
   border-radius: 0.25rem;
-  padding: 0.5rem;
-  margin: 0.3rem;
+  padding: 0.2rem;
+  margin: 0.4rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  > span {
+    width: 3.5em;
+    text-align: center;
+    font-size: 0.4em;
+  }
   &:hover {
     background: rgba(0, 0, 0, 0.4);
   }
@@ -99,6 +106,7 @@ function ZoomButton(props) {
       <SquarePaddingPush />
       <IconDarkSquare>
         <i className={iconClass}></i>
+        <span>Zoom</span>
       </IconDarkSquare>
     </ButtonWrapper>
   );

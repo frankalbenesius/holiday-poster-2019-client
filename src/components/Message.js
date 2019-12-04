@@ -46,6 +46,7 @@ const NonImageWrapper = styled.div`
 
 const Image = styled.img`
   max-width: 100%;
+  background: black;
 `;
 
 const MessageWrapper = styled.div`

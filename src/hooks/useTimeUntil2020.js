@@ -2,14 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { DEADLINE_DATE } from "../constants";
 
 export default function useTimeUntil2020() {
-  const [timerText, setTimerText] = useState(
-    formatTimeLeft(getTimeUntil2020())
-  );
+  const [timerText, setTimerText] = useState(getTimeUntil2020());
 
   useInterval(() => {
-    const timeValues = getTimeUntil2020();
-    const formattedTimeLeft = formatTimeLeft(timeValues);
-    setTimerText(formattedTimeLeft);
+    setTimerText(getTimeUntil2020());
   }, 1000);
 
   return timerText;
@@ -70,15 +66,15 @@ function getTimeUntil2020() {
   }
 }
 
-function formatTimeLeft(timeValues) {
-  if (submissionsClosed(timeValues)) {
-    return "None. It's over, y'all.";
-  }
+// function formatTimeLeft(timeValues) {
+//   if (submissionsClosed(timeValues)) {
+//     return "None. It's over, y'all.";
+//   }
 
-  const { days, hours, minutes, seconds } = timeValues;
-  if (days > 0) {
-    return `${days} days`;
-  }
+//   const { days, hours, minutes, seconds } = timeValues;
+//   if (days > 0) {
+//     return `${days} days`;
+//   }
 
-  return [hours, minutes, seconds].map(x => x.toString().padStart(2)).join(":");
-}
+//   return [hours, minutes, seconds].map(x => x.toString().padStart(2)).join(":");
+// }

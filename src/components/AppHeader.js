@@ -2,11 +2,11 @@ import React from "react";
 import styled from "@emotion/styled";
 import Ticker from "react-ticker";
 
-import useTimeUntil2020 from "../hooks/useTimeUntil2020";
+import useTimeUntil2020, { submissionsClosed } from "../hooks/useTimeUntil2020";
 import { COLORS } from "../constants";
 import { APP_TITLE } from "../views/InfoView";
 
-export default function(props) {
+export default function() {
   return (
     <AppHeaderWrapper>
       <TickerWrapper>
@@ -40,11 +40,6 @@ export default function(props) {
   );
 }
 
-function TimeUntil2020() {
-  const timerText = useTimeUntil2020();
-  return <span>{timerText}</span>;
-}
-
 const AppHeaderWrapper = styled.header`
   text-align: center;
   font-family: "Calistoga";
@@ -64,4 +59,43 @@ const AppSubHeader = styled.div`
 const TickerWrapper = styled.div`
   width: 100%;
   white-space: nowrap;
+`;
+
+function TimeUntil2020() {
+  const { days, hours, minutes, seconds } = useTimeUntil2020();
+
+  if (submissionsClosed()) {
+    return <span>None! Time to print.</span>;
+  }
+
+  return (
+    <span>
+      <TimeThing number={days} text={"days"} />
+      <TimeThing number={hours} text={"hrs"} />
+      <TimeThing number={minutes} text={"mins"} />
+      <TimeThing number={seconds} text={"secs"} />
+    </span>
+  );
+}
+
+function TimeThing({ number, text }) {
+  return (
+    <TimeThingWrapper>
+      <TimeThingBox>{number.toString().padStart(2, "0")}</TimeThingBox>
+      {text}
+    </TimeThingWrapper>
+  );
+}
+
+const TimeThingWrapper = styled.span`
+  margin-right: 0.2em;
+`;
+
+const TimeThingBox = styled.span`
+  padding: 0.1rem 0.2rem;
+  background: ${COLORS.pinkDark};
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-right: 0.1rem;
 `;

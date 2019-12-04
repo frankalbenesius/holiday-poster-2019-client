@@ -4,7 +4,6 @@ import Ticker from "react-ticker";
 
 import useTimeUntil2020, { submissionsClosed } from "../hooks/useTimeUntil2020";
 import { COLORS } from "../constants";
-import { APP_TITLE } from "../views/InfoView";
 
 export default function() {
   return (
@@ -12,19 +11,39 @@ export default function() {
       <TickerWrapper>
         <Ticker>
           {({ index }) => {
-            let text = APP_TITLE;
-            if (index > 0 && index % 9 === 0) {
-              text = "P.S. I Frank You";
+            let text = "test";
+            const options = [
+              "🆒🆒🆒",
+              "P.S. I Frank You",
+              "Thank You For Participating"
+            ];
+            switch (index % 4) {
+              default: {
+                text = "The Year Was 2019";
+                break;
+              }
+              case 1: {
+                text = "A Visual Time Capsule";
+                break;
+              }
+              case 2: {
+                text = <i>& Grass Fed Collaborative Experience</i>;
+                break;
+              }
+              case 3: {
+                text = options[Math.floor(Math.random() * options.length)];
+                break;
+              }
             }
-            if (index > 0 && index % 16 === 0) {
-              text = "Alligators. Dingo babies.";
+
+            const lol = Math.random();
+            if (lol > 0.95) {
+              text = <sup>{text}</sup>;
             }
-            if (index > 0 && index % 6 === 0) {
-              text = "Thank you for participating!";
+            if (lol < 0.05) {
+              text = <sub>{text}</sub>;
             }
-            if (index > 0 && index % 20 === 0) {
-              text = "🆒🆒🆒";
-            }
+
             return (
               <span style={{ width: "506px" }}>
                 {text}&nbsp;&nbsp;&bull;&nbsp;&nbsp;

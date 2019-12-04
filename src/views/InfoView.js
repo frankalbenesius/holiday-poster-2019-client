@@ -4,18 +4,49 @@ import { keyframes } from "@emotion/core";
 
 import { COLORS, BREAKPOINTS } from "../constants";
 
-export const APP_TITLE = "Frank's Collaborative Poster Project 2019";
+export const APP_TITLE = "The Year Was 2019";
 
 export default function InfoView() {
   return (
     <InfoViewWrapper>
-      <InfoHeader>Welcome to {APP_TITLE}!!!</InfoHeader>
+      <InfoHeader>
+        <div
+          style={{
+            fontSize: "0.6em",
+            textTransform: "uppercase"
+          }}
+        >
+          Welcome To
+        </div>
+        <div
+          style={{
+            fontSize: "1.7em",
+            fontFamily: "Calistoga",
+            lineHeight: "0.9",
+            color: COLORS.pinkDark
+          }}
+        >
+          The Year Was 2019
+        </div>
+        <div style={{ fontSize: "1.2em", color: COLORS.tealDark }}>
+          A Visual Time Capsule
+        </div>
+        <div
+          style={{
+            fontSize: "0.6em",
+            fontStyle: "italic",
+            color: COLORS.orangeDark
+          }}
+        >
+          & Grass Fed Collaborative Experience
+        </div>
+      </InfoHeader>
       <WelcomeImg src={`${process.env.PUBLIC_URL}/welcome.gif`} />
       <InfoContent>
-        <div>
+        <InfoContentBlock>
           <b>Goal: </b> Create a poster together.
-        </div>
-        <div>
+        </InfoContentBlock>
+        <InfoContentBlock>
           <b>Your Task: </b>
           <MobileTasks>
             <li>Go to the "Poster" tab.</li>
@@ -28,8 +59,8 @@ export default function InfoView() {
             </li>
             <li>Upload an image.</li>
           </DesktopTasks>
-        </div>
-        <div>
+        </InfoContentBlock>
+        <InfoContentBlock>
           <b>Other Things: </b>
           <DetailsUnorderedList>
             <li>
@@ -55,7 +86,7 @@ export default function InfoView() {
             </li>
             <li>I appreciate you all. Thank you.</li>
           </DetailsUnorderedList>
-        </div>
+        </InfoContentBlock>
       </InfoContent>
     </InfoViewWrapper>
   );
@@ -104,6 +135,9 @@ const InfoHeader = styled.div`
 const InfoContent = styled.div`
   margin: 1rem 0;
   text-align: left;
+`;
+const InfoContentBlock = styled.div`
+  margin: 0 0 0.5rem;
 `;
 
 const animationName = keyframes`

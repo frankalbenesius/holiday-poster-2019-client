@@ -31,7 +31,6 @@ export const CELL_COUNT = {
   y: 9
 };
 
-// export const API_URL = "http://localhost:3001";
 export const API_URL = "https://poster-api.frank.dev";
 export const HEADER_URL =
   "https://storage.googleapis.com/holiday-poster-2019.appspot.com/header.png";

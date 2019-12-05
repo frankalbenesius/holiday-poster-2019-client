@@ -26,7 +26,7 @@ export default function InfoView() {
         </div>
         <div
           style={{
-            fontSize: "1.7em",
+            fontSize: "1.65em",
             fontFamily: "Calistoga",
             lineHeight: "0.9",
             color: COLORS.pinkDark
@@ -44,7 +44,7 @@ export default function InfoView() {
             color: COLORS.orangeDark
           }}
         >
-          & All-Natural Collaborative Experience
+          & Grass-Fed Collaborative Experience
         </div>
       </InfoHeader>
       <WelcomeImg src={`${process.env.PUBLIC_URL}/welcome.gif`} />

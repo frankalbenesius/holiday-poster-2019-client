@@ -25,7 +25,6 @@ export const COLORS = {
   pinkDark: pink.darken(0.25).string(),
   pinkLight: pink.lighten(0.4).string()
 };
-console.log(COLORS);
 
 export const CELL_COUNT = {
   x: 8,
@@ -36,8 +35,8 @@ export const API_URL = "https://poster-api.frank.dev";
 export const HEADER_URL =
   "https://storage.cloud.google.com/holiday-poster-2019.appspot.com/header.png";
 
-export const PASSPHRASE_KEY = "passphrase_test_at_1904";
-export const LOCATION_KEY = "location";
+export const PASSPHRASE_KEY = "passphrase_for_real";
+export const LOCATION_KEY = "location_for_real";
 
 export const DEADLINE_DATE = new Date(2020, 0, 1);
 

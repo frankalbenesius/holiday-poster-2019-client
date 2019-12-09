@@ -110,7 +110,7 @@ export default function ImageInput({
         id={id}
         type="file"
         onChange={handleImageChange}
-        accept="image/png, image/jpeg"
+        accept="image/png, image/jpeg, image/jpg"
       />
     </Form>
   );

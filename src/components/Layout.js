@@ -81,6 +81,7 @@ const MobileContentWrapper = styled.div`
   flex: 1 1 auto;
   height: 100%;
   display: flex;
+  overflow: hidden;
   @media only screen and (min-width: ${BREAKPOINTS.medium}) {
     display: none;
   }

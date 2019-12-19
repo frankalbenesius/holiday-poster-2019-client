@@ -32,8 +32,6 @@ export const CELL_COUNT = {
 };
 
 export const API_URL = "https://poster-api.frank.dev";
-export const HEADER_URL =
-  "https://storage.cloud.google.com/holiday-poster-2019.appspot.com/header.png";
 
 export const PASSPHRASE_KEY = "passphrase_for_real";
 export const LOCATION_KEY = "location_for_real";

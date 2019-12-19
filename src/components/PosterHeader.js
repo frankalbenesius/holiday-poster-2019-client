@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { CELL_COUNT, HEADER_URL } from "../constants";
+import { CELL_COUNT } from "../constants";
 
 export default function PosterHeader(props) {
-  return <HeaderImg alt="header" src={HEADER_URL} />;
+  return (
+    <HeaderImg alt="header" src={`${process.env.PUBLIC_URL}/header.png`} />
+  );
 }
 
 const HeaderImg = styled.img`

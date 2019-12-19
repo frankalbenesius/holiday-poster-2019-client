@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { CELL_COUNT, HEADER_URL, COLORS } from "../../constants";
+import { CELL_COUNT, COLORS } from "../../constants";
 import { SquarePaddingPush } from "./AdjacentSquareDimmer";
 
 export default function ZoomedOutPoster({ squares, onLocationClick }) {
@@ -8,7 +8,7 @@ export default function ZoomedOutPoster({ squares, onLocationClick }) {
   return (
     <ZoomedOutPosterWrapper ref={posterRef}>
       <PosterRatioPusher />
-      <HeaderImg src={HEADER_URL} />
+      <HeaderImg alt="header" src={`${process.env.PUBLIC_URL}/header.png`} />
       {squares.map(square => {
         const [x, y] = square.location;
         if (x < 0 || y < 0 || x >= CELL_COUNT.x || y >= CELL_COUNT.y) {

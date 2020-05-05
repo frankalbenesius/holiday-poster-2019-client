@@ -52,7 +52,7 @@ const Image = styled.img`
 const MessageWrapper = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
-  background-color: ${p => (p.isFrank ? COLORS.tealLight : "inherit")};
+  background-color: ${(p) => (p.isFrank ? COLORS.tealLight : "inherit")};
 `;
 
 const MessageMeta = styled.div`
@@ -65,7 +65,7 @@ const MessageParticipant = styled.span`
 `;
 
 function MessageTimestamp({ children }) {
-  const date = fromUnixTime(children._seconds);
+  const date = fromUnixTime(children.seconds);
   return (
     <MessageTimestampStyles>
       {format(date, "M/dd/yy h:mm aaaa")}

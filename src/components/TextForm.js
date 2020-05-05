@@ -19,10 +19,11 @@ export default function TextForm(props) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <InputAndSubmitWrapper>
         <Input
+          disabled={props.disabled}
           id={props.name}
           value={text}
           placeholder={props.placeholder}
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
         />
         <Button disabled={props.loading || text.length < 1} type="submit">
           {props.loading ? (

@@ -4,6 +4,7 @@ import fetch from "unfetch";
 
 import TextForm from "./TextForm";
 import { PASSPHRASE_KEY, LOCATION_KEY } from "../constants";
+import { submissionsClosed } from "../hooks/useTimeUntil2020";
 
 export default function PassphraseChecker(props) {
   const [passphrase, setPassphrase] = useLocalStorage(PASSPHRASE_KEY, "");
@@ -19,15 +20,15 @@ export default function PassphraseChecker(props) {
     fetch("https://poster-api.frank.dev/locate", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ passphrase: lowercasePassphrase })
+      body: JSON.stringify({ passphrase: lowercasePassphrase }),
     })
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
           return res.json();
         } else {
-          res.json().then(err => {
+          res.json().then((err) => {
             if (err.message) {
               setError(error.message);
             } else {
@@ -53,9 +54,12 @@ export default function PassphraseChecker(props) {
     const label = props.label || "Enter your passphrase:";
     return (
       <TextForm
+        disabled={submissionsClosed()}
         label={label}
         name="passphrase_input"
-        placeholder="passphrase"
+        placeholder={
+          submissionsClosed() ? "Passphrases are inactive." : "passphrase"
+        }
         onSubmit={handlePassphraseSubmit}
         loading={loading}
         errorText={error}

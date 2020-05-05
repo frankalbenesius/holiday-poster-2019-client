@@ -9,7 +9,7 @@ export default function PosterStatusBar({ zoomedOut, location, squares }) {
 
   if (zoomedOut) {
     const percentComplete =
-      squares.filter(s => !!s.image).length / squares.length;
+      squares.filter((s) => !!s.image).length / (squares.length - 1);
 
     return (
       <Wrapper>
@@ -18,7 +18,7 @@ export default function PosterStatusBar({ zoomedOut, location, squares }) {
     );
   }
 
-  const currentSquare = squares.find(s => {
+  const currentSquare = squares.find((s) => {
     return s.location.toString() === location.toString();
   });
   const name = currentSquare.participant;
